@@ -1,0 +1,31 @@
+#header_list{
+    font-family: 'Oswald', sans-serif;
+font-family: 'Roboto Condensed', sans-serif;
+    ul{
+        display: flex;
+        justify-content: flex-start;
+        li{
+            margin: 0px 20px;
+            list-style-type: none;
+            color: white;
+        }
+        a:hover{
+            background-color: black;
+            color: whitesmoke !important;
+            padding: 5px 8px;
+            border-radius: 3px;
+            transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+    }
+}
+.Homepage{
+    font-size: 20px;
+    text-transform: uppercase;
+}
+a{
+    text-decoration: none !important;
+    text-transform: capitalize;
+    font-size: 14px;
+    color: white !important;
+    font-weight: 500;
+}

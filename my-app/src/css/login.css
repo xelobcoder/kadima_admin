@@ -1,0 +1,30 @@
+#Login {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#Login .loginchild {
+  width: 400px;
+  font-family: 'Oswald', sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+label {
+  margin: 10px 0px;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+input {
+  height: 60px;
+  border: 1px solid lightgray !important;
+}
+
+#secretQuestion {
+  display: none;
+}
+/*# sourceMappingURL=login.css.map */

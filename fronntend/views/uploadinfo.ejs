@@ -1,0 +1,48 @@
+<%- include("header_links.ejs") %>
+<%- include("header.ejs") %>
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="upload_new_property">
+                    <h1>upload property</h1>
+                    <hr>
+                    <form action="/uploadInfo" method="post">
+                        <div class="form-group">
+                            <label for="property_name">Property Name</label>
+                            <input type="text" class="form-control" id="property_name" name="property_name" placeholder="Enter Property Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="property_type">Property Type</label>
+                            <select class="form-control" id="property_type" name="property_type">
+                                <option>Apartment</option>
+                                <option>House</option>
+                                <option>Villa</option>
+                                <option>Flat</option>
+                                <option>Shop</option>
+                                <option>Office</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="property_location">Property Location</label>
+                            <input type="text" class="form-control" id="property_location" name="property_location" placeholder="Enter Property Location">
+                        </div>
+                        <div class="form-group">
+                            <label for="property_price">Property Price</label>
+                            <input type="text" class="form-control" id="property_price" name="property_price" placeholder="Enter Property Price">
+                        </div>
+                        <div class="form-group">
+                            <label for="property_description">Property Description</label>
+                            <textarea class="form-control" id="property_description" name="property_description" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="property_gps_location">gps location</label>
+                            <input type="text" class="form-control" id="property_gps_location" name="property_gps_location" placeholder="Enter gps location">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
