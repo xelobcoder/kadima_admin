@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: whitesmoke;
+  color: black !important;
+}
+
+nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+nav #Navlink {
+  color: black !important;
+  font-size: 15px;
+  font-family: 'Roboto', sans-serif;
+  margin: 15px 10px;
+  text-transform: lowercase;
+  border: 1px solid blue;
+  background-color: white;
+  padding: 5px 20px;
+  border-radius: 10px;
+}
+
+nav #Navlink:hover {
+  background-color: blue;
+  color: white !important;
+}
+/*# sourceMappingURL=properties.css.map */

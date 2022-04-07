@@ -1,11 +1,9 @@
 import React , {Component} from 'react';
-import Headers from "../components/header";
 import "../css/login.css";
 class Login extends Component{
     render() {
         return (
             <div>
-                <Headers/>
                 <div className='container-fluid'>
                 <div className='container'>
                     <div className='row'> 

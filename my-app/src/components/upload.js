@@ -1,15 +1,9 @@
 import React, { Component } from 'react'
-import Headers from './header';
 import "../css/upload.css";
 
 class Uploads extends Component {
   render() {
     return (       
-      <div>
-        <Headers />
-        <div className='container-fluid'>
-         <div className="container">
-          <div className="row" ></div>
           <div className="col" style={{margin: "0% 20%"}}>
               <h4 className='text-lead mt-4 text-capitalize text-dark'>upload details of new Property</h4>
               <hr/>
@@ -118,11 +112,8 @@ class Uploads extends Component {
                 </form>
               </div>
           </div>
-        </div>
-        </div>
-      </div>
     )
   }
 }
 
-export default Uploads
+export default Uploads;
