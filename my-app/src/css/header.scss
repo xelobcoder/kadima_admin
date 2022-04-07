@@ -1,20 +1,22 @@
 #header_list{
     font-family: 'Oswald', sans-serif;
 font-family: 'Roboto Condensed', sans-serif;
-    ul{
+    nav{
         display: flex;
         justify-content: flex-start;
-        li{
+        .NavLink{
             margin: 0px 20px;
             list-style-type: none;
             color: white;
+            padding: 5px 8px;
         }
-        a:hover{
+        .NavLink:hover{
             background-color: black;
             color: whitesmoke !important;
-            padding: 5px 8px;
+            // padding: 5px 8px;
             border-radius: 3px;
-            transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+            border: 2px solid lightfuchsia !important;
+            transition: 1000ms cubic-bezier(0.39, 0.575, 0.565, 1);
         }
     }
 }

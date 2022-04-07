@@ -1,0 +1,48 @@
+invalid{
+    border: 1px solid red !important;
+}
+
+valid{
+    border: 1px solid blue !important;
+}
+:placeholder-shown{
+    color: #ccc !important;
+}
+label{
+    margin:10px 0px !important;
+    font-weight:600 !important;
+    text-transform: capitalize;
+}
+body{
+    background-color: whitesmoke;
+}
+
+#gridLayer{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    // padding: 0px 0px 0px 10px;
+    margin-right: 10px !important;
+    select{
+        width: 80%;
+    }
+}
+#info{
+    border-left: 5px solid red;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin-top: 20px;
+}
+
+#dimensions{
+    display: grid;
+    grid-template-columns: 40% auto 40%;
+}
+.times{
+    position: relative;
+    top: 50px;
+    left: 50px;
+    font-size: 30px;
+    font-style: italic;
+    color:black;
+    font-weight: 600;
+}
