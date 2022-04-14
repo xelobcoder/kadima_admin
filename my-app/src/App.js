@@ -1,6 +1,7 @@
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import  Login from "./components/login";
 import io from "socket.io-client";
+import "./css/index.css";
 import Request from "./components/request";
 import { Routes,Route } from "react-router-dom";
 import Homepage from "./components/hompage";

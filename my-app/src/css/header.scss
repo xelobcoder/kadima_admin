@@ -1,9 +1,8 @@
 #header_list{
-    font-family: 'Oswald', sans-serif;
-font-family: 'Roboto Condensed', sans-serif;
     nav{
         display: flex;
         justify-content: flex-start;
+        align-items: center;
         .NavLink{
             margin: 0px 20px;
             list-style-type: none;
