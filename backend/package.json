@@ -4,6 +4,7 @@
   "description": "a real estate platform for hosting properties",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,6 +25,7 @@
   },
   "homepage": "https://github.com/xelobcoder/kadima_admin#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.3",
     "socket.io": "^4.4.1"
   }

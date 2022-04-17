@@ -1,7 +1,8 @@
-import React from 'react'
+import React from 'react';
+import LandSelection from './landSelection';
 
 export default function Request() {
   return (
-    <div>request</div>
+    <div><LandSelection/></div>
   )
 }

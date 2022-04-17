@@ -23,7 +23,7 @@ const data = {
             region:"Northern Region",
             district: "Tamale Metro",
             date_added: "2018-01-01",
-            date_update: "2019-02-11"        
+            date_update: null
         },
         {
             id: 1,
@@ -230,4 +230,4 @@ const data = {
 
 
 
-export default data;
+module.exports = data;

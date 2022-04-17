@@ -1,6 +1,6 @@
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import  Login from "./components/login";
-import io from "socket.io-client";
+// import io from "socket.io-client";
 import "./css/index.css";
 import Request from "./components/request";
 import { Routes,Route } from "react-router-dom";
@@ -13,18 +13,18 @@ import Transactions from "./components/transactions";
 import Forsale from "./components/sale";
 import ForRent from "./components/rent";
 import Uploads from "./components/upload";
-
-
-const socket = io("http://localhost:8000");
-
-
+import LandView from "./components/landView";
+import LandUpload from "./components/landUpload";
 function App() {
   return (
      <div>
         <Headers/>
         <Routes>
           <Route path="/" element={<Homepage/>}></Route>
-          <Route path="/request" element={<Request/>}></Route>
+          <Route path="/request" element={<Request/>}>
+             <Route path="landUpload" element={<LandUpload/>}></Route>
+             <Route path="landView" element={<LandView/>}></Route>
+          </Route>
           <Route path="/properties" element={<Properties/>}>
              <Route path="sale" element={<Forsale/>}></Route>
              <Route path="rent" element={<ForRent/>}></Route>

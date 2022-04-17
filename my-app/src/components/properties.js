@@ -24,10 +24,11 @@ class Properties extends Component{
                             <Link id="Navlink" to="upload">Upload property </Link>
                         </nav>
                         </div> 
-                   </div>
-                   <hr></hr>
+                   </div>                   
+                </div>
+                <div classname="container">
                    <div className="row">
-                          <Outlet/>
+                     <Outlet/>
                    </div>
                 </div>
             </div>

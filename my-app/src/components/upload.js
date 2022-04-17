@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
-import "../css/upload.css";
+// import "../css/upload.css";
+
 
 class Uploads extends Component {
   render() {
     return (       
-          <div className="col" style={{margin: "0% 20%"}}>
+          <div className="col" style={{margin: "0px 100px"}}>
               <h4 className='text-lead mt-4 text-capitalize text-dark'>upload details of new Property</h4>
               <hr/>
-              <div className='col'>
+              <div className='col '>
                 <form>
                     <div className="form-group">
                         <label for="exampleInputEmail1">Property Name</label>
@@ -91,21 +92,6 @@ class Uploads extends Component {
                         <label for="phone Number2">Phone Number 2</label>
                         <input type="tel" className="form-control" multiple id="phone Number" placeholder="Enter Phone Number" />
                     </div>
-                    <div className='alert alert-light' id='info'>For land property only ********[ land Dimensions]</div>
-                    <div className="form-group" id='dimensions'>
-                       <div>
-                       <label for="length">length</label>
-                        <input type="number" className="form-control" id="length" placeholder="Enter length" />
-                       </div>
-                       <div className='times'>
-                           X
-                       </div>
-                       <div>
-                       <label for="width">width</label>
-                        <input type="number" className="form-control" id="width" placeholder="Enter width" />
-                       </div>
-                    </div>
-
                     <button type='button' className='btn btn-primary mt-3'>
                         Upload
                     </button>
