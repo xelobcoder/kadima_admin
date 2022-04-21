@@ -25,10 +25,12 @@ nav #Navlink {
   background-color: white;
   padding: 10px 20px;
   border-radius: 5px;
+  font-family: Lucida Console;
 }
 
 nav #Navlink:hover {
   background-color: rgba(0, 0, 0, 0.957);
   color: white !important;
+  outline: 2px solid black;
 }
 /*# sourceMappingURL=properties.css.map */

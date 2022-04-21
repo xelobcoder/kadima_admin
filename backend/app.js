@@ -4,8 +4,19 @@ const io = require("socket.io")(httpServer);
 const express = require("express");
 const app = express(io);
 const cors = require("cors");
+const mongoose = require("mongoose");
+const landmodel = require("./models/landModel.js");
+const queries = require("./models/queries");
+const fileuploads = require("express-fileupload");
+
+mongoose.connect("mongodb://localhost:27017/kadima",(err)=>{
+    if(err) throw err;
+    console.log("Connected to MongoDB");
+});
 
 app.use(cors());
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 
 
 io.on("connection", (socket) => {
@@ -23,5 +34,49 @@ app.get("/api/properties", function(request,response){
     response.send(data.properties);
 })
 
+// api for posting land properties;
+
+app.post("/api/v1/properties/land", (request,response) => {
+    const data  = {
+        gps_location: request.body.gps_location,
+        isComplete: request.body.isComplete,
+        land_width: request.body.land_width,
+        land_length: request.body.land_length,
+        location: request.body.location,
+        district: request.body.district,
+        region: request.body.region,
+        price: request.body.price,
+        marketStatus: request.body.marketStatus,
+        topography: request.body.topography
+    };
+
+    const landuploadModel = new landmodel(data);
+    landuploadModel.save((err,data) => {
+      if(err){
+          response.send(err);
+          console.log(err)
+      }
+      else{
+          response.send("success");
+      }
+    }
+    )
+
+})
 
 
+
+
+
+app.get("/api/v1/properties/incomplete", (request,response) => {
+    queries.getIncomplete(response,landmodel);
+});
+
+app.post("", (request,response) => {
+
+   
+})
+
+const landimages = require("./models/image_land.js");
+
+app.use(landimages);

@@ -21,10 +21,33 @@ label {
 
 input {
   height: 60px;
-  border: 1px solid lightgray !important;
+  border: 1px solid lightgray;
+  outline: none;
+  -webkit-box-shadow: 0px !important;
+          box-shadow: 0px !important;
+}
+
+label::before {
+  content: "*";
+  color: red;
+  margin-right: 5px;
 }
 
 #secretQuestion {
   display: none;
+}
+
+input:required:invalid, textarea:required:invalid {
+  border: 2px solid red;
+}
+
+input:valid, textarea:valid {
+  border: 1px solid #0d6efd !important;
+}
+
+input::after {
+  content: "fill in the field above";
+  font-size: 14px;
+  color: lightgray;
 }
 /*# sourceMappingURL=login.css.map */

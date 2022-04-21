@@ -15,6 +15,8 @@ import ForRent from "./components/rent";
 import Uploads from "./components/upload";
 import LandView from "./components/landView";
 import LandUpload from "./components/landUpload";
+import Translands from "./components/Translands";
+import Uploadimages from "./components/Uploadimages";
 function App() {
   return (
      <div>
@@ -22,12 +24,16 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage/>}></Route>
           <Route path="/request" element={<Request/>}>
+             <Route index  element={<LandView/>}></Route>
              <Route path="landUpload" element={<LandUpload/>}></Route>
-             <Route path="landView" element={<LandView/>}></Route>
+             <Route path="Translands" element={<Translands/>}>
+                <Route path="Uploadimages/:key" element={<Uploadimages/>}>
+             </Route>
+             </Route>
           </Route>
           <Route path="/properties" element={<Properties/>}>
              <Route path="sale" element={<Forsale/>}></Route>
-             <Route path="rent" element={<ForRent/>}></Route>
+             <Route index element={<ForRent/>}></Route>
              <Route path="upload" element={<Uploads/>}></Route>
           </Route>
           <Route path="/login" element={<Login/>}/>
