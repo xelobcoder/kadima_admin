@@ -19,8 +19,8 @@ class Headers extends Component {
                                <NavLink className="NavLink" to="/request">Lands</NavLink>
                                <NavLink className="NavLink" to="/analysis">Analysis</NavLink>
                                <NavLink className="NavLink" to="/login">Login</NavLink>
+                                 <NavLink className="NavLink" to="/transaction">Transactions</NavLink>
                                <NavLink className="NavLink" to="/logout">Logout</NavLink>
-                               <NavLink className="NavLink" to="/transaction">Transaction</NavLink>
                             </nav>
                         </div>
                     </div>

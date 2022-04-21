@@ -38,8 +38,8 @@ function App() {
           </Route>
           <Route path="/login" element={<Login/>}/>
           <Route path="/analysis" element={<Analysis/>}/>
-          <Route path="/logout" element={<Logout/>}/>
           <Route path="/transaction" element={<Transactions/>}/>
+          <Route path="/logout" element={<Logout/>}/>
         </Routes>
      </div>
   )
