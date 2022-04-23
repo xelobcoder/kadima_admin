@@ -47,7 +47,7 @@
     max-height: 100vh;
     overflow: hidden;
 }
-#login{
+#login,.validated{
     background-color: var(--color-background-default) !important;
     height: 100vh;
     width: 100vw;
@@ -95,7 +95,6 @@
     border: 1px solid var(--color-background-alternative-deep);
 }
 #secretQuestion{
-    display: none;
     width: 50vw;
     margin: 0 20%;
     label{
@@ -117,4 +116,12 @@
 }
 .invalid{
     border: 2px solid red !important;
+}
+input:focus{
+    border: 2px solid lightseagreen;
+    color: black;
+
+}
+.button:disabled{
+    background-color: var(--color-text-error);
 }

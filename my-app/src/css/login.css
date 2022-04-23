@@ -48,7 +48,7 @@
   overflow: hidden;
 }
 
-#login {
+#login, .validated {
   background-color: var(--color-background-default) !important;
   height: 100vh;
   width: 100vw;
@@ -60,12 +60,12 @@
           justify-content: center;
 }
 
-#login .loginchild {
+#login .loginchild, .validated .loginchild {
   width: 50vw;
   margin: 0px 20%;
 }
 
-#login .loginchild label {
+#login .loginchild label, .validated .loginchild label {
   font-weight: 500;
   font-family: Lucida Console;
   color: gray;
@@ -76,7 +76,7 @@
   margin: 10px 0px;
 }
 
-#login .loginchild input {
+#login .loginchild input, .validated .loginchild input {
   border-radius: 20px;
   height: 50px;
   border: 1px solid black;
@@ -85,7 +85,7 @@
   background-color: rgba(245, 245, 245, 0.511);
 }
 
-#login .loginchild input:focus {
+#login .loginchild input:focus, .validated .loginchild input:focus {
   outline: none;
   border: 2px solid var(--color-background-elevated);
 }
@@ -106,7 +106,6 @@
 }
 
 #secretQuestion {
-  display: none;
   width: 50vw;
   margin: 0 20%;
 }
@@ -130,5 +129,14 @@
 
 .invalid {
   border: 2px solid red !important;
+}
+
+input:focus {
+  border: 2px solid lightseagreen;
+  color: black;
+}
+
+.button:disabled {
+  background-color: var(--color-text-error);
 }
 /*# sourceMappingURL=login.css.map */

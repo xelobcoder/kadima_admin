@@ -7,7 +7,9 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const landmodel = require("./models/landModel.js");
 const queries = require("./models/queries");
-const fileuploads = require("express-fileupload");
+const adminlogin = require("./models/admin");
+const middlwares = require ("./models/controllers/middlewares");
+
 
 mongoose.connect("mongodb://localhost:27017/kadima",(err)=>{
     if(err) throw err;
@@ -80,3 +82,11 @@ app.post("", (request,response) => {
 const landimages = require("./models/image_land.js");
 
 app.use(landimages);
+
+
+// login for administrator
+
+app.post("/api/adminlogin",(request,response) => {
+    const {username, password} = request.body;  
+    middlwares.findPassword(request,response);
+})

@@ -1,129 +1,132 @@
 import React ,{useState,useRef,useEffect} from 'react';
+import {Navigate, useNavigate}  from "react-router-dom";
+import {Form,Button} from 'react-bootstrap';
 import "../css/login.css";
+import axios from 'axios';
 
 
 function Login() {
-    const [username,setUsername ] = useState('');
-    const [validUsername,setValidUsername] = useState(false);
-    const [password,setPassword] = useState("");
-    const [validPassword,setValidPassword] = useState(false);
-    const [error,setError] = useState(false);
-    const [errorMessage,setErrorMessage] = useState("");
-    const [success,setSuccess] = useState(false);
-    const [answer,setAnswer] = useState('');
-    const [question,setQuestion] = useState('');
-    const [userFocus,setUserFocus] = useState(false);
-    const [passFocus,setPassFocus] = useState(false);
-    const [disable,setDisable] = useState(false);
-    const usersRef = useRef(null);
+  const [username,setUsername] = useState('');
+  const [password,setPassword] = useState('');
+  const [error,setError] = useState('');
+  const [secretQuestion,setSecretQuestion] = useState('');
+  const [secretAnswer,setSecretAnswer] = useState('');
+  const [errorMessage,setErrorMessage] = useState('');
+  const [disable,setDisable] = useState(true);
+  const [validPass,setValidPass] = useState(false);
+  const [validated,setValidated] = useState(false);
+  const userRef = useRef();
+  const passRef = useRef();
+  let navigate = useNavigate();
 
-
-
-    const PASSWORD_REGEX = /^\S*(?=\S{6,})(?=\S*\d)(?=\S*[A-Z])(?=\S*[a-z])(?=\S*[!@#$%^&*? ])\S*$/;
-    const handleUserChange = function(e) {
-        let value = e.target.value;
-        setUsername(value);
+//   handleers
+  const handleUsername = (e) => {
+    setUsername(e.target.value);
     }
-
-    const handlePasswordChange = function(e) {
+    const handlePassword = (e) => {
         let value = e.target.value;
         setPassword(value);
     }
-
-    const handleSubmit = function(e) {
-        e.preventDefault();
+  const handleSecretQuestion = (e) => {
+    setSecretQuestion(e.target.value);
     }
- 
-    useEffect(() => {
-        if(password.length > 0) {
-            setErrorMessage("Password must contain at least 6 characters, one uppercase, one lowercase, one number and one special character");
-            const result = PASSWORD_REGEX.test(password);
-            result ? setValidPassword(true) : setValidPassword(false);
-            validPassword ? setError(false) : setError(true);
-            setDisable(true) 
-        } else {
-            setValidPassword(false);
-            setError(true);
-            setErrorMessage("Password must contain at least 6 characters, one uppercase, one lowercase, one number and one special character");
-        }
-          
-    },[password])
+  const handleSecretAnswer = (e) => {
+    setSecretAnswer(e.target.value);
+  }
+
+  const handleSubmit = (e) => {
+      e.preventDefault();
+      const payload = {
+        username: username,
+        password: password,
+        question: secretQuestion,
+        answer: secretAnswer
+      }
+      let getdata = axios.post('http://localhost:8000/api/adminlogin',payload)
+      getdata.then( (response) => {
+          let result = response.data;
+          console.log(response?.config?.data);
+         if(Object.keys(result)[0] === "credential"){
+              setErrorMessage(result.credential);
+              setError(true);
+              console.log("w",result);
+         } else {
+            setError(false);setErrorMessage('');setValidPass(true);setValidated(true);
+             let token = result.token;
+             localStorage.setItem('token', token);
+             navigate("/");
+         }
+      }).catch( (error) => { console.log(error)});
+        
+  }
 
 
-    useEffect( ()=> {
-        validUsername ? setError(false) : setError(true);
-       if(username.length > 6) {
-           setValidUsername(true);
-           setError(false);
-           setErrorMessage("");
-       } else {
-           setErrorMessage("Username must contain at least 6 characters");
-           setValidUsername(false);
-           setError(true);
-       }
-    },[username])
+  useEffect( ()=> {
+    userRef.current.focus();
+  },[])
 
-  
-    useEffect(() => {
-        if(validUsername && validPassword) {
-            setDisable(false);
-        } else {
-            setDisable(true);
-        }
-    } ,[username,password])
 
-   
+  useEffect( ()=> {
+    const PASSWORD_REGEX = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
+    const match = PASSWORD_REGEX.test(password);
+    match ? setValidPass(true) : setValidPass(false);
+    if(!validPass){
+        setError(true);
+        setErrorMessage('Password must contain at least 7 characters,1 uppercase letter, 1 lowercase letter, 1 number and 1 special character');
+    } else {
+        setError(false);
+        setErrorMessage('');
+    }
+  },[password])
 
-return (
-<div>
-   
-<div className='container-fluid' id="login">
-<div className='container'>
-    <div className='row'> 
-    <form className='col-12' id='Login'>
-        <div className='mt-5'>
-        <div className='loginchild'>
+  useEffect( ()=>{
+      if(username.length > 0 && password.length > 0 && secretQuestion.length > 0 && secretAnswer.length > 0){
+        setDisable(false);
+      }
+  },[username,password,secretQuestion,secretAnswer])
+
+return(
+<div id="login">
+    <div className='loginchild'>
+        <div>
             {
-                error ? <div className="alert alert-danger">{
-                    errorMessage
-                } </div> :null
-           
+                error ? <div className={errorMessage == ""? 
+                "alert": "alert-danger p-3 rounded mt-3"}>{errorMessage} </div> : null
             }
         </div>
-            <div className='card-body loginchild'>
-            <label id="fullnamelabel" htmlFor="fullname">username</label>
-            <input id="fullname" name="username" type="text"
-              className="form-control" required 
-              value={username} placeholder="eg.tiifu hamza kojo boronson"
-               onChange={(e) => handleUserChange(e)}
-               onFocus={(e) => setUserFocus(true)} 
-               onBlur={(e) => setUserFocus(false)} 
-             />
-            <label id='passwordlabel'>password</label>
-            <input id='password' name="password" 
-                className={validPassword ? "form-control" : "form-control"}
-                onFocus={(e) => setPassFocus(true)} 
-                onBlur={(e) => setPassFocus(false)} 
-                placeholder='xxxxxxxxx739383652' onChange={(e) => handlePasswordChange(e)} type="password" class="form-control" required value={password}/>
-                <button type='submit' className='button'>submit</button>
-            </div>
-            </div>
-    </form>
-    </div>
-        {/* <div className='row' id='secretQuestion'>
-                <label>Type in Secret question? </label>
-                <input type="text" className="form-control" value={question} required/>
-                <label>
-                Type in answer to secret Question
-            </label>
-            <input type="text" className='form-control'required value={answer} placeholder='type answer her' id='secrectAnswer' />
-                <button type='button' className='btn button mt-3'>verify</button>
-        </div> */}
-    </div>
-    </div>
+     <Form onSubmit={(e) => handleSubmit(e)}>
+        <Form.Group className="mb-3" controlId="formBasicUsername">
+            <Form.Label>Username</Form.Label>
+            <Form.Control value={username} 
+                type="text" placeholder="Enter username"
+               ref={userRef} onChange={(e) => handleUsername(e)} />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control value={password} 
+                type="password" placeholder="Password" 
+                onChange={(e) => handlePassword(e)} />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="secretquestion">
+                <Form.Label>Secret question</Form.Label>
+                <Form.Control value={secretQuestion} 
+                type="text" placeholder='enter Secret Question'
+                onChange={(e) => handleSecretQuestion(e)}  />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="secretAnswer">
+                <Form.Label>Answer to Secret Question</Form.Label>
+                <Form.Control value={secretAnswer} 
+                type="password" placeholder='enter answer'
+                onChange={(e) => handleSecretAnswer(e)}  />
+            </Form.Group>
+            <Button className='button' type="submit" disabled={disable}>
+                Submit
+            </Button>
+    </Form>
+</div>
 </div>
 )
-
 }
 
 
