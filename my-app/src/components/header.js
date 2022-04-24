@@ -10,7 +10,7 @@ class Headers extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-6">
-                           <Link to ="/" className="Homepage"> Homepage</Link>
+                           <Link to ="/hompage" className="Homepage"> Homepage</Link>
                         </div>
                         <div className="col-6" id="header_list">
                             <nav>

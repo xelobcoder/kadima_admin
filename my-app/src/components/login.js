@@ -3,6 +3,7 @@ import {Navigate, useNavigate}  from "react-router-dom";
 import {Form,Button} from 'react-bootstrap';
 import "../css/login.css";
 import axios from 'axios';
+import LoginHeaders from './loginHeaders';
 
 
 function Login() {
@@ -52,8 +53,8 @@ function Login() {
               console.log("w",result);
          } else {
             setError(false);setErrorMessage('');setValidPass(true);setValidated(true);
-             let token = result.token;
-             localStorage.setItem('token', token);
+             localStorage.setItem('accesstoken', result.accesstoken);
+             localStorage.setItem('refreshtoken', result.refreshtoken);
              navigate("/");
          }
       }).catch( (error) => { console.log(error)});
@@ -85,7 +86,9 @@ function Login() {
       }
   },[username,password,secretQuestion,secretAnswer])
 
-return(
+    return (  
+<div>
+<LoginHeaders/>
 <div id="login">
     <div className='loginchild'>
         <div>
@@ -125,6 +128,7 @@ return(
             </Button>
     </Form>
 </div>
+</div>          
 </div>
 )
 }

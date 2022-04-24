@@ -4,6 +4,7 @@ import "../css/rent.css";
 import axios from 'axios';
 
 
+
 export default function Rent() {
     const [property,setProperty] = useState([]);
 

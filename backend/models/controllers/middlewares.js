@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const admin = require ("../admin");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const env = require("../../config/env")
+const {ACCESS_TOKEN,REFRESH_TOKEN} = require("../../config/env");
+
 module.exports = {
     salts: 10,
     hash: "jellyTimeKadimaFunPopJenifferMyQueenForgaveToxic",
@@ -13,16 +14,13 @@ module.exports = {
         return bcrypt.hashSync(password, this.salts); 
     },
     accessToken: function(request,response) {
-      let token = jwt.sign({
+      let accesstoken = jwt.sign({
         username: request.body.username,
-      }, this.hash, { expiresIn: 30000 });
-      request.headers.authorization = token;
-       response.json({token: token});
-    },
-  refreshToken: async function () {
-    jwt.sign({
-      username: request.body.username}
-      ,env.accessToken,{expiresIn: 30000});
+      }, ACCESS_TOKEN, { expiresIn: "30m" });
+      let refreshtoken = jwt.sign({
+        username: request.body.username}
+        , REFRESH_TOKEN, { expiresIn: "24h" });
+      response.status(200).json({accesstoken: accesstoken, refreshtoken: refreshtoken});
     },
    comparePassword: function(password,hashed) {
     return bcrypt.compare(password,hashed) 

@@ -70,6 +70,8 @@ app.post("/api/v1/properties/land", (request,response) => {
 
 
 
+
+
 app.get("/api/v1/properties/incomplete", (request,response) => {
     queries.getIncomplete(response,landmodel);
 });
@@ -87,6 +89,6 @@ app.use(landimages);
 // login for administrator
 
 app.post("/api/adminlogin",(request,response) => {
-    const {username, password} = request.body;  
-    middlwares.findPassword(request,response);
+    const { username, question, password, answer } = request.body; 
+    
 })
