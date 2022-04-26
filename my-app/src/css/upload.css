@@ -11,13 +11,10 @@ valid {
 }
 
 label {
-  margin: 10px 0px !important;
-  font-weight: 600 !important;
+  margin: 15px 0px !important;
+  font-weight: 400 !important;
   text-transform: capitalize;
-}
-
-body {
-  background-color: whitesmoke;
+  color: gray;
 }
 
 #gridLayer {
@@ -54,5 +51,10 @@ body {
   font-style: italic;
   color: black;
   font-weight: 600;
+}
+
+input, textarea, select {
+  height: 50px;
+  border: 2px solid black !important;
 }
 /*# sourceMappingURL=upload.css.map */

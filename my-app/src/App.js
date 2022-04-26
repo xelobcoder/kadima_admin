@@ -33,7 +33,7 @@ function App() {
                </Route>
                <Route path="/properties" element={<Properties/>}>
                   <Route path="sale" element={<Forsale/>}></Route>
-                  <Route index element={<ForRent/>}></Route>
+                  <Route index path="rent" element={<ForRent/>}></Route>
                   <Route path="upload" element={<Uploads/>}></Route>
                </Route>
                <Route path="/login" element={<Login/>}/>

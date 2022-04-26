@@ -295,9 +295,9 @@ return (
     </p>
     </Alert>
     <ListGroup className="mb-3">
-    <ListGroup.Item>Northern Region</ListGroup.Item>
-    <ListGroup.Item>Greater Accra Region</ListGroup.Item>
-    <ListGroup.Item>Ashanti Region</ListGroup.Item>
+      <ListGroup.Item>Northern Region</ListGroup.Item>
+      <ListGroup.Item>Greater Accra Region</ListGroup.Item>
+      <ListGroup.Item>Ashanti Region</ListGroup.Item>
     </ListGroup>
     <Form>
     <Form.Group id="filter" style={split}>

@@ -9,23 +9,21 @@ nav{
     display: flex;
     justify-content: flex-start;
     #Navlink{
-        color: black !important;
+        color: gray !important;
         font-size: 15px;
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Roboto', sans-serif,'Times New Roman', Times, serif;
         margin: 15px 10px;
-        font-weight: 500;
-        text-transform: lowercase;
-        border: 2px solid black;
-        background-color: white;
+        font-weight: 700;
+        text-transform: capitalize;
+        border: 2px solid lightgray;
+        background-color: whitesmoke;
         padding: 10px 20px;
-        border-radius: 5px;
-        font-family: Lucida Console;
+        border-radius: 20px;
     }
    
     #Navlink:hover{
-        background-color:rgba(0, 0, 0, 0.957);
+        background-color:black;
         color: white !important;
-        outline: 2px solid black;
     }
       
     

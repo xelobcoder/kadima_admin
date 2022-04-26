@@ -1,0 +1,15 @@
+.drop-file {
+  border: 3px dotted lightseagreen;
+  background-color: whitesmoke;
+  padding: 20px 30px;
+  margin: 20px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+}
+
+#files {
+  display: none;
+}
+/*# sourceMappingURL=drop.css.map */

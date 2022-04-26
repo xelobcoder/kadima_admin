@@ -1,0 +1,12 @@
+.drop-file{
+  border: 3px dotted lightseagreen;
+ background-color: whitesmoke;
+  padding: 20px 30px;
+  margin: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+#files{
+  display: none;
+}

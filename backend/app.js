@@ -8,7 +8,10 @@ const mongoose = require("mongoose");
 const landmodel = require("./models/landModel.js");
 const queries = require("./models/queries");
 const adminlogin = require("./models/admin");
-const middlwares = require ("./models/controllers/middlewares");
+const middlwares = require("./models/controllers/middlewares");
+const getSource = require("./models/originlog");
+const postBuildingImages = require("./models/propImage");
+const {router,buildingModel} = require ("./models/property");
 
 
 mongoose.connect("mongodb://localhost:27017/kadima",(err)=>{
@@ -20,6 +23,8 @@ app.use(cors());
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
+app.use(router)
+app.use(postBuildingImages);
 
 io.on("connection", (socket) => {
   console.log(socket);
@@ -72,7 +77,7 @@ app.post("/api/v1/properties/land", (request,response) => {
 
 
 
-app.get("/api/v1/properties/incomplete", (request,response) => {
+app.get("/api/v1/properties/incomplete",getSource, (request,response) => {
     queries.getIncomplete(response,landmodel);
 });
 
@@ -82,6 +87,8 @@ app.post("", (request,response) => {
 })
 
 const landimages = require("./models/image_land.js");
+const res = require("express/lib/response");
+const getsource = require("./models/originlog.js");
 
 app.use(landimages);
 
@@ -89,6 +96,5 @@ app.use(landimages);
 // login for administrator
 
 app.post("/api/adminlogin",(request,response) => {
-    const { username, question, password, answer } = request.body; 
-    
+    const { username, question, password, answer } = request.body;
 })

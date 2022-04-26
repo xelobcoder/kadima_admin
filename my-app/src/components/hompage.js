@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import ForRent from "./rent";
 import Forsale from "./sale";
+import Headers from "./header";
 
 
 

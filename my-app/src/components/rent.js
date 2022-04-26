@@ -2,10 +2,11 @@ import React , {useEffect,useState} from 'react';
 import { Link } from 'react-router-dom';
 import "../css/rent.css";
 import axios from 'axios';
+import Headers from './header';
 
 
 
-export default function Rent() {
+export default function ForRent() {
     const [property,setProperty] = useState([]);
 
     useEffect( ()=>{
@@ -17,7 +18,8 @@ export default function Rent() {
     },[])
 
     return (
-        <div id='properties' className='rent'>
+        <div >
+            <div id='properties' className='p-5'>
             {
                 property.map(
                     (property)=>(
@@ -54,6 +56,7 @@ export default function Rent() {
                     )
                 )
             }
+        </div>
         </div>
     )
 } 
