@@ -1,4 +1,58 @@
-#header_list nav {
+#headerContainer {
+  background-color: rgba(25, 124, 167, 0.804);
+}
+
+#nav-row {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 40% auto;
+      grid-template-columns: 40% auto;
+  grid-gap: 5%;
+}
+
+#nav-row #header_list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+#nav-row #header_list nav {
+  margin: 0;
+  padding: 0;
+}
+
+#nav-row #header_list nav .NavLink {
+  color: white;
+  text-transform: capitalize;
+  list-style-type: none;
+  text-decoration: none;
+  border-right: 1px solid white;
+  padding: 20px 20px;
+  font-weight: 600;
+}
+
+#nav-row #header_list nav .NavLink:hover {
+  color: black;
+  background-color: white;
+}
+
+#nav-row #header_list nav .NavLink:nth-child(1) {
+  border-left: 1px solid white;
+}
+
+#drop-down {
+  display: none;
+}
+
+.Homepage {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -8,34 +62,37 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-}
-
-#header_list nav .NavLink {
-  margin: 0px 20px;
-  list-style-type: none;
+  text-decoration: none;
+  padding: 20px 20px;
+  font-weight: 600;
   color: white;
-  padding: 5px 8px;
-}
-
-#header_list nav .NavLink:hover {
-  background-color: black;
-  color: whitesmoke !important;
-  border-radius: 3px;
-  border: 2px solid lightfuchsia !important;
-  -webkit-transition: 1000ms cubic-bezier(0.39, 0.575, 0.565, 1);
-  transition: 1000ms cubic-bezier(0.39, 0.575, 0.565, 1);
-}
-
-.Homepage {
-  font-size: 20px;
   text-transform: uppercase;
 }
 
-a {
+#landselection {
+  background-color: white;
+  margin: 0;
+  padding: 0;
+}
+
+#landselection #child {
+  margin: 0;
+  padding: 0;
+}
+
+#landselection #child #child-tab {
+  margin: 0;
+  border-right: 1px solid lightgray;
+  padding: 10px 10px;
+}
+
+#landselection #child #child-tab #landselectionchild {
   text-decoration: none !important;
-  text-transform: capitalize;
-  font-size: 14px;
-  color: white !important;
-  font-weight: 500;
+}
+
+#landselection #child #child-tab:hover {
+  background-color: whitesmoke;
+  color: white;
+  border-bottom: none !important;
 }
 /*# sourceMappingURL=header.css.map */

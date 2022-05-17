@@ -69,7 +69,7 @@ class LandUpload extends Component {
       price: '',
       marketStatus: '',
       topography: '',
-      available: true,
+      available: "",
       loading: false,
       isComplete: false,
       show: true,
@@ -81,10 +81,12 @@ class LandUpload extends Component {
       loading: true,
     })
     if (logmsg === 'success') {
-      let formcot = document.getElementById('form-cot')
-      formcot.style.display = 'none'
+      window.scrollTo(0,0)
+      let formelement = document.getElementById("formelement");
+      formelement.reset();
       setTimeout(() => {
-        this.setState({ loading: false })
+        this.setState({ loading: false });
+        window.location.href = "/request/Translands";
       }, 2000)
     }
   }
@@ -110,7 +112,7 @@ return (
 <div>
 <div className="container">
 {this.state.loading === false ? null : (
-<Alert className="" dismissible>
+<Alert className="alert alert-success mt-2" dismissible>
     <Alert.Heading>Successfully uploaded</Alert.Heading>
 </Alert>
 )}
@@ -122,7 +124,7 @@ return (
     fill in to upload land
     </div>
     <div className="form-wrapper">
-    <form
+    <form id="formelement"
         encType="multipart/form-data"
         onSubmit={(e) => this.onSubmit(e)}
     >

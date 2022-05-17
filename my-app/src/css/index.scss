@@ -27,7 +27,7 @@ body{
     overflow-y: auto;
     box-sizing: border-box;
     font-family: 'Oswald', sans-serif;
-    background-color: white !important;
+    background-color: #E9EDF0;
     font-family: 'Roboto Condensed', sans-serif;
 }
 
@@ -53,3 +53,20 @@ body{
 }
 
 
+#landselection{
+  margin: 0;
+  padding: 0;
+  background-color: whitesmoke;
+  #child{
+     margin: 0;
+     padding: 0px 10px;
+     #child-tab{
+       list-style-type: none !important;
+        background-color: white;
+        margin-right: 20px;
+        #landselectionchild{
+          padding: 20px 30px;
+        }
+     }
+  }
+}

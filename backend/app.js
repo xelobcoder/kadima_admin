@@ -12,6 +12,7 @@ const middlwares = require("./models/controllers/middlewares");
 const getSource = require("./models/originlog");
 const postBuildingImages = require("./models/propImage");
 const {router,buildingModel} = require ("./models/property");
+const path = require("path");
 
 
 mongoose.connect("mongodb://localhost:27017/kadima",(err)=>{
@@ -97,4 +98,25 @@ app.use(landimages);
 
 app.post("/api/adminlogin",(request,response) => {
     const { username, question, password, answer } = request.body;
+})
+
+
+app.get('/api/v1/landview/single/', (request,response) => {
+    let idQuery =request.query;
+
+    let id = Object.values(idQuery)[0].trim();
+
+    response.sendFile(path.resolve(__dirname + "/public/images/landImages/" , id));
+})
+
+
+app.get('/api/v1/landview/all/', (request,response) => {
+    let idQuery = request.query;
+
+    let id = Object.values(idQuery)[0].trim();
+
+    landmodel.findById({_id:id}, function(err,data) {
+        if(err) throw err;
+        response.send(data);
+    })
 })

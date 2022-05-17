@@ -28,7 +28,7 @@ body {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   font-family: 'Oswald', sans-serif;
-  background-color: white !important;
+  background-color: #E9EDF0;
   font-family: 'Roboto Condensed', sans-serif;
 }
 
@@ -52,5 +52,26 @@ body {
   background-color: white;
   margin-bottom: 10px;
   outline: none;
+}
+
+#landselection {
+  margin: 0;
+  padding: 0;
+  background-color: whitesmoke;
+}
+
+#landselection #child {
+  margin: 0;
+  padding: 0px 10px;
+}
+
+#landselection #child #child-tab {
+  list-style-type: none !important;
+  background-color: white;
+  margin-right: 20px;
+}
+
+#landselection #child #child-tab #landselectionchild {
+  padding: 20px 30px;
 }
 /*# sourceMappingURL=index.css.map */

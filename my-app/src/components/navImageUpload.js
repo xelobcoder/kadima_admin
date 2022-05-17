@@ -10,46 +10,48 @@ import fileUpload from "../api/fileupload.js";
 
 function Uploadimages() {
   const [files, setFiles] = useState([]);
+  const [previeew, setPrevieew] = useState(false);
+  
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
     onDrop: acceptedFiles => {
-      setFiles(acceptedFiles)
+      setFiles(acceptedFiles.map(file => Object.assign(file, {
+        preview: URL.createObjectURL(file)
+      })));
     },
     multiple: true,
   })
 
-  useEffect(() => {
-    if (files.length !== 0) {
-      let formdata = new FormData();
-      files.forEach((file) => {
-        formdata.append("files", file);
-      })
-      fileUpload(formdata);
-    }
-  }, [files])
+  const payloadPush = function (e) {
+    e.preventDefault();
+   if (files.length !== 0) {
+     let formdata = new FormData();
+     files.forEach((file) => {
+       formdata.append("files", file);
+     })
+     fileUpload(formdata);
+   }
+  }
+  
+  const location = useLocation().pathname.split("")[1];
   
   
   const handlePreview = function (e) {
-    console.log(files.map((file) => {
-      const preview = URL.createObjectURL(file);
-      return preview;
-    }))
+    previeew ? setPrevieew(false) : setPrevieew(true);
   }
   
-  const location = useLocation().pathname.split("/")[1];
   
+  const images = files.map((file) => {
+   return ( <div key={file.name} className="p-3 bg-white" style={{borderRadius:"10px",display:"flex",justifyContent:"justify-content-center"}}>
+            <img src={file.preview} alt={file.name}
+              style={{
+                height: "200px", width: "350px",
+                border: "1px solid lightgray", borderRadius: "10px"
+              }} />
+      </div>)
+  })
   
-  
-  
-  const images = files.map(file => (
-    <div key={file.name} className="p-3 bg-white" style={{borderRadius:"10px",display:"flex",justifyContent:"justify-content-center"}}>
-      <img src={file.preview} alt={file.name}
-        style={{
-          height: "200px", width: "350px",
-          border: "1px solid lightgray", borderRadius: "10px"
-        }} />
-    </div>
-  ));
+
   
 
   return (
@@ -81,13 +83,15 @@ function Uploadimages() {
             </div>
           </InputGroup>
           <ButtonGroup className='secondary'>
-              <Button type="button" onClick={(e) => handlePreview(e)} className="btn mr-5 btn-outline-success text-white">preview</Button>
-              <Button type="submit"    className="btn btn-outline-warning text-dark">submit</Button>
+              <Button type="button" onClick= { (e) => handlePreview(e)} className="btn mr-5 btn-outline-success text-white">preview</Button>
+              <Button type="submit" onClick={ (e) => payloadPush(e)}    className="btn btn-outline-warning text-dark">submit</Button>
            </ButtonGroup>
           </Form>
       </div>
-      <div className='mt-4' style={{display:"grid",gridTemplateColumns: "2fr 2fr 2fr",gridGap: "20px 20px",backgroundColor:"whitesmoke",padding:"30px 30px"}}>
-        {images}
+      <div className={previeew ? "mt-4" : "d-none"} style={{display:"grid",gridTemplateColumns: "2fr 2fr 2fr",gridGap: "20px 20px",backgroundColor:"whitesmoke",padding:"30px 30px"}}>
+        {
+          images
+        }
       </div>
     </div>
   )

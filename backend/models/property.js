@@ -17,6 +17,7 @@ const building = new Schema({
   parking: { type: String, required: true },
   region: { type: String, required: true },
   district: { type: String, required: true },
+  purpse: { type: String, required: true ,default:"sale"},
  area: { type: String, required: true },
  isComplete: {
   type: Boolean,

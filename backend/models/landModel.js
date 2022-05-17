@@ -40,25 +40,27 @@ const Land = new Schema({
         required: true
     },
     images:  {
-        type: Buffer,
-        required: false,
-        default: []
-    },
-    imagesLocation:{
-        type: String,
-        required: false,
-        default: "/public/landImages/",
-    },
-    imageuploadDate: {
-        type: Date,
-        default: Date.now,
-        required: false
+         imagesCollection: {
+             type: Array,
+             required: false,
+             default: []
+         },
+         imageupdateTime: {
+            type: Date,
+            required: false,
+            default: Date.now
+         },
+         imageLocation: {
+            type: String,
+            required: false,
+            default: "/public/images/landImages/"
+         },
     }
 
 },{timestamps:true});
 
 
-const landmodel = mongoose.model("admin",Land);
+const landmodel = mongoose.model("landCollections",Land);
 
 module.exports = landmodel;
 

@@ -3,7 +3,7 @@ import React, {
     useEffect
 } from 'react';
 import axios from 'axios';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet ,useNavigate} from 'react-router-dom';
 import {Table} from "react-bootstrap";
 import "../css/table.css";
 
@@ -12,7 +12,10 @@ function Translands() {
     const [lands, setLands] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
-    const [show, setShow] = useState(true);
+    const [viewImages,setviewImages] = useState(false);
+    const [show, setShow] = useState(false);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,17 +30,33 @@ function Translands() {
     }, []);
 
 
+    useEffect( () => {
+      loading === false ? setShow(false) : setShow(true);
+      lands.length === 0? setShow(false): setShow(true);
+      lands.length === 0 ? setviewImages(true) : setviewImages(false);
+    },[show,lands])
+
+
+    const navigateview = function(e) {
+        e.preventDefault();
+        navigate(`/request/landView`);
+    }
+
+
 return (
 <div>
 <div className='container mt-2'>
     {
         loading ? <h2 className='text-primary'>loading....</h2> :
         (
-          lands.length === 0 ? <p className='text-primary'>
-            No incomplete land found
+          lands.length === 0 ? <p className='text-black alert-primary'>
+            <div className='p-4  d-flex justify-content-center' style={{border: "1px solid rgba(0, 0, 255, 0.435)"}}>
+              No incomplete land found ......
+            </div>
           </p> :
           (
-            <Table bordered hover>
+            <div className='bg-white p-4'> 
+                 <Table bordered hover>
             <thead style={{fontWeight: "400",color:"gray",fontSize:"15px",textTransform: "capitalize"}} className='p-2 text-lead'>
                 <tr>
                 <th>Customer id</th>
@@ -75,16 +94,23 @@ return (
             }
             </tbody>
          </Table>
+            </div>
           )
         )
     }
 </div> 
-<div className='container' id="upload-images">
-   <Outlet/>
-</div>
-<div className='container' id="images-outlet">
-    
-</div>
+<div className = {show ? "container-fluid" : "d-none"}>
+    <div className='container' style={{backgroundColor: "inherit !important"}}>
+        <div className='row'>
+            <div className='col mt-5'>
+                <Outlet/>
+            </div>
+        </div>
+    </div>      
+</div> 
+    <div className={viewImages ?  "container d-block mb-3" : "d-none"} id="images-outlet">
+        <button onClick={(e) => {navigateview(e)}} className='btn btn-primary pl-5 pr-5 pt-2 pb-2 btn-block' style={{borderRadius: "0px"}}>click to view uploaded images</button>
+    </div>
 </div>
 
     )

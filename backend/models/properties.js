@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 const saveData = function (request, response) {
  const { name, price, property, gpsAddress, marketstatus, bedroom, bathrooms, toilet, phonenumber,
-  parking, region, district, area } = request.body;
+  parking, region, district, area,purpose } = request.body;
 }
 
 router.route("/v1/api/building")

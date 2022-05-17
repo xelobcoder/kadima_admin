@@ -1,32 +1,72 @@
-#header_list{
+#headerContainer{
+  background-color: rgba(25, 124, 167, 0.804);
+}
+#nav-row{
+  display: grid;
+  grid-template-columns: 40% auto;
+  grid-gap: 5%;
+  #header_list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
     nav{
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        .NavLink{
-            margin: 0px 20px;
-            list-style-type: none;
-            color: white;
-            padding: 5px 8px;
-        }
-        .NavLink:hover{
-            background-color: black;
-            color: whitesmoke !important;
-            // padding: 5px 8px;
-            border-radius: 3px;
-            border: 2px solid lightfuchsia !important;
-            transition: 1000ms cubic-bezier(0.39, 0.575, 0.565, 1);
-        }
+      margin: 0;
+      padding: 0;
+      .NavLink{
+         color: white;
+          text-transform: capitalize;
+          list-style-type: none;
+          text-decoration: none;
+          border-right: 1px solid white;
+          padding: 20px 20px;
+          font-weight: 600;
+      }
+      .NavLink:hover{
+        color: black;
+        background-color: white;
+      }
+      .NavLink:nth-child(1){
+        border-left: 1px solid white;
+      }
     }
+  }
+}
+
+#drop-down{
+  display: none;
 }
 .Homepage{
-    font-size: 20px;
-    text-transform: uppercase;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-decoration: none;
+  padding: 20px 20px;
+  font-weight: 600;
+  color: white;
+  text-transform: uppercase;
 }
-a{
-    text-decoration: none !important;
-    text-transform: capitalize;
-    font-size: 14px;
-    color: white !important;
-    font-weight: 500;
+
+#landselection{
+  background-color: white;
+  margin: 0;
+  padding: 0;
+  #child{
+    margin: 0;
+    padding: 0;
+    #child-tab{
+      margin: 0;
+      border-right: 1px solid lightgray;
+      padding: 10px 10px;
+      #landselectionchild{
+        text-decoration: none !important;
+      }
+    }
+    #child-tab:hover{
+      background-color: whitesmoke;
+      color: white;
+      border-bottom: none !important;
+    }
+  }
 }

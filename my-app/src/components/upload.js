@@ -22,6 +22,7 @@ function Uploads(props) {
     const [address, setAddress] = useState("");
     const [phone1, setPhone1] = useState("");
     const [phone2, setPhone2] = useState("");
+    const [purpose,setPurpose] = useState("sell");
     
     const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,6 +42,7 @@ function Uploads(props) {
             gps,
             address,
             phone: [phone1, phone2],
+            purpose,
         }
         const BASEURL = "http://localhost:8000/api/v1/property";
         const postPayload = axios(BASEURL, {
@@ -88,6 +90,15 @@ function Uploads(props) {
                         <label for="exampleInputPassword1">Property Price</label>
                              <input type="number" onChange={(e) => setPrice(e.target.value)}
                         className="form-control" id="price" placeholder="Enter Property Price" required />
+                    </div>
+                    <div className='form-group'>
+                        <label>purpose</label>
+                        <select className='form-control' onChange={(e) => setPurpose(e.target.value)}>
+                            <option value="sell">sell</option>
+                            <option value="rent">rent</option>
+                            <option value="buy">buy</option>
+                            <option value="lease">lease</option>
+                        </select>
                     </div>
                     <div className='form-group'>
                         <label for="GPSAddress">GPS Address</label>
@@ -212,6 +223,7 @@ function Uploads(props) {
                                 onChange={(e) => setArea(e.target.value)}
                             placeholder='location' required id='area' />
                     </div> 
+                    
                     <button type='submit' className='btn btn-primary mt-3'>
                         Upload
                     </button>
