@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { Alert, Button, Form, Input, ListGroup } from 'react-bootstrap'
-import axios from 'axios'
+import axios from 'axios';
+import "../css/input.css";
+import Tabs from './tabs';
 import { useReducer, useEffect } from 'react'
+
 
 const colorLeft = {
   fontWeight: 400,
@@ -11,6 +14,7 @@ const colorLeft = {
 const inputModifications = {
   border: '2px solid red !important',
 }
+
 
 const split = {
   display: 'grid',
@@ -73,8 +77,25 @@ class LandUpload extends Component {
       loading: false,
       isComplete: false,
       show: true,
+      next: false,
+      previous: true
     }
   }
+
+  transverseNext  = (e) => {
+    this.setState({
+      next: true,
+      previous: false
+    })
+  }
+
+  transversePrevious = (e) => {
+    this.setState({
+      previous: true,
+      next: false
+    })
+  }
+
 
   log = function (data, logmsg) {
     this.setState({
@@ -91,6 +112,7 @@ class LandUpload extends Component {
     }
   }
 
+ 
   onSubmit = (e) => {
     e.preventDefault()
     let fetchdata = async () => {
@@ -109,7 +131,7 @@ class LandUpload extends Component {
 
 render() {
 return (
-<div>
+ <div>
 <div className="container">
 {this.state.loading === false ? null : (
 <Alert className="alert alert-success mt-2" dismissible>
@@ -117,86 +139,81 @@ return (
 </Alert>
 )}
 </div>
-<div className="container" id="form-cot">
-<div className="row">
-<div className="col-8 mt-2">
-    <div className="alert alert-primary" style={colorLeft}>
-    fill in to upload land
-    </div>
-    <div className="form-wrapper">
-    <form id="formelement"
-        encType="multipart/form-data"
-        onSubmit={(e) => this.onSubmit(e)}
-    >
-        <div className="form-group">
-        <label htmlFor="gps">GPS location</label>
-        <input
-            onChange={(e) =>
-            inputEvents.change(e, (value) => {
-                this.setState({ gps_location: value })
-            })
-            }
-            required
-            value={this.state.gps_location}
-            className="form-control"
-            onFocus={(e) => inputEvents.focus(e)}
-            onBlur={(e) => inputEvents.blur(e)}
-            placeholder="GA-543-0153"
-            id="gpsLocation"
-            type="string"
-        />
-        </div>
-        <div className="form-group" id="dimensions">
-        <div>
-            <label htmlFor="length">length</label>
+    <div className="container" id="form-cot">
+      <div className="row">
+        <div className="col-8 mt-2" >
+           <form id='formelement' encType="multipart/form-data" onSubmit={(e) => this.onSubmit(e)}>
+             <section className={this.state.previous ? "d-block" : "d-none"}>
+             <div className="form-group">
+              <label htmlFor="gps">GPS location</label>
+              <input
+                  onChange={(e) =>
+                  inputEvents.change(e, (value) => {
+                      this.setState({ gps_location: value })
+                  })
+                  }
+                  required
+                  value={this.state.gps_location}
+                  className="form-control"
+                  onFocus={(e) => inputEvents.focus(e)}
+                  onBlur={(e) => inputEvents.blur(e)}
+                  placeholder="GA-543-0153"
+                  id="gpsLocation"
+                  type="string"
+              />
+              </div>
+              <div className="form-group" id="dimensions">
+              <div>
+                  <label htmlFor="length">length</label>
+                  <input
+                  required
+                  onChange={(e) =>
+                      inputEvents.change(e, (value) => {
+                      this.setState({ land_length: value })
+                      })
+                  }
+                  onFocus={(e) => inputEvents.focus(e)}
+                  type="number"
+                  style={inputModifications}
+                  className="form-control"
+                  id="length"
+                  placeholder="10 m"
+                  />
+              </div>
+              <div className="times">X</div>
+              <div>
+                  <label htmlFor="width">width</label>
+                  <input
+                  onChange={(e) =>
+                      inputEvents.change(e, (value) => {
+                      this.setState({ land_width: value })
+                      })
+                  }
+                  required
+                  type="number"
+                  className="form-control"
+                  id="width"
+                  placeholder="Enter width"
+                  />
+              </div>
+
+              </div>
+                  <div className="form-group">
+            <label htmlFor="location">location</label>
             <input
-            required
-            onChange={(e) =>
+                required
+                type="string"
+                className="form-control"
+                id="location"
+                onChange={(e) =>
                 inputEvents.change(e, (value) => {
-                this.setState({ land_length: value })
+                    this.setState({ location: value })
                 })
-            }
-            onFocus={(e) => inputEvents.focus(e)}
-            type="number"
-            style={inputModifications}
-            className="form-control"
-            id="length"
-            placeholder="10 m"
+                }
+                placeholder="Kanvile"
             />
-        </div>
-        <div className="times">X</div>
-        <div>
-            <label htmlFor="width">width</label>
-            <input
-            onChange={(e) =>
-                inputEvents.change(e, (value) => {
-                this.setState({ land_width: value })
-                })
-            }
-            required
-            type="number"
-            className="form-control"
-            id="width"
-            placeholder="Enter width"
-            />
-        </div>
-        </div>
-        <div className="form-group">
-        <label htmlFor="location">location</label>
-        <input
-            required
-            type="string"
-            className="form-control"
-            id="location"
-            onChange={(e) =>
-            inputEvents.change(e, (value) => {
-                this.setState({ location: value })
-            })
-            }
-            placeholder="Kanvile"
-        />
-        </div>
-        <div className="form-group">
+            </div>
+            <div className="form-group">
         <label htmlFor="district">district</label>
         <input
             required
@@ -211,125 +228,126 @@ return (
             placeholder="Accra Metro"
         />
         </div>
-        <div>
-        <label htmlFor="region">region</label>
-        <input
-            required
-            type="string"
-            className="form-control"
-            onChange={(e) =>
-            inputEvents.change(e, (value) => {
-                this.setState({ region: value })
-            })
-            }
-            id="region"
-            placeholder="Northern region"
-        />
-        </div>
-        <div>
-        <label>Land topography</label>
-        <textarea
-            required
-            className="form-control"
-            onChange={(e) =>
-            inputEvents.change(e, (value) => {
-                this.setState({ topography: value })
-            })
-            }
-            id="topography"
-            placeholder="Describe topography of land"
-        ></textarea>
-        </div>
         <div className="form-group">
-        <label htmlFor="price">price</label>
-        <input
-            required
-            type="number"
-            className="form-control"
-            onChange={(e) =>
-            inputEvents.change(e, (value) => {
-                this.setState({ price: value })
-            })
-            }
-            id="price"
-            placeholder="Enter price"
-        />
-        </div>
-        <div className="form-group">
+             <button onClick={(e) => this.transverseNext(e)} className='btn btn-warning p-2 mt-3'>next section</button>
+          </div>
+             </section>
+              
+             <section className={this.state.next ? "d-block": "d-none"}>
+             <div className='form-group'>
+                  <label htmlFor="region">region</label>
+                  <input
+                      required
+                      type="string"
+                      className="form-control"
+                      onChange={(e) =>
+                      inputEvents.change(e, (value) => {
+                          this.setState({ region: value })
+                      })
+                      }
+                      id="region"
+                      placeholder="Northern region"
+                  />
+              </div>
+             <div className='form-group'>
+                <label>Land topography</label>
+                <textarea
+                    required
+                    className="form-control"
+                    onChange={(e) =>
+                    inputEvents.change(e, (value) => {
+                        this.setState({ topography: value })
+                    })
+                    }
+                    id="topography"
+                    placeholder="Describe topography of land"
+                ></textarea>
+              </div>
+              <div className="form-group">
+                <label htmlFor="price">price</label>
+                <input
+                    required
+                    type="number"
+                    className="form-control"
+                    onChange={(e) =>
+                    inputEvents.change(e, (value) => {
+                        this.setState({ price: value })
+                    })
+                    }
+                    id="price"
+                    placeholder="Enter price"
+                />
+                </div>
+                <div className="form-group">
         <label htmlFor="marketStatus">market status</label>
-        <input
-            required
-            onFocus={(e) => inputEvents.focus(e)}
-            onChange={(e) =>
-            inputEvents.change(e, (value) => {
-                this.setState({ marketStatus: value })
-            })
-            }
-            onBlur={(e) => inputEvents.blur(e)}
-            type="string"
-            className="form-control"
-            id="marketStatus"
-            placeholder="Available"
-        />
+        <select
+         required
+         onFocus={(e) => inputEvents.focus(e)}
+         onChange={(e) =>
+         inputEvents.change(e, (value) => {
+             this.setState({ marketStatus: value })
+         })
+         }
+         onBlur={(e) => inputEvents.blur(e)}
+         type="string"
+         className="form-control"
+         id="marketStatus"
+        >
+           <option value="">Select market status</option>
+           <option value="open">open</option> 
+           <option value="closed">closed</option>
+        </select>
         </div>
 
-        <div className="form-group">
+        <div className="form-group d-flex justify-content-between">
         <button
             type="submit"
-            className="btn btn-block btn-warning mt-3 "
+            className="btn btn-block btn-warning mt-3 ml-5 "
         >
             save
         </button>
+        <button onClick={(e) => this.transversePrevious(e)} className='btn btn-info mt-3'>previous section</button>
+
         </div>
-    </form>
+             </section>
+           </form>
+        </div>
+          <div className="col-4 mt-2" style={leftbar}>
+         
+          <ListGroup className="mb-3">
+            <ListGroup.Item>Northern Region</ListGroup.Item>
+            <ListGroup.Item>Greater Accra Region</ListGroup.Item>
+            <ListGroup.Item>Ashanti Region</ListGroup.Item>
+          </ListGroup>
+          <Form>
+          <Form.Group id="filter" style={split}>
+              <Form.Control
+              style={filter}
+              id="Fregion"
+              placeholder="region"
+              />
+              <Form.Control
+              style={filter}
+              id="Fdistrict"
+              placeholder="district"
+              />
+          </Form.Group>
+          <Form.Group
+              controlId="cost-filter"
+              className="mt-2"
+              style={split}
+          >
+              <Form.Control style={filter} placeholder="min-cost" />
+              <Form.Control style={filter} placeholder="max-cost" />
+          </Form.Group>
+          <Form.Group className="mt-3 d-flex justify-content-end">
+              <Button>Filter</Button>
+          </Form.Group>
+          </Form>
+</div> 
+      </div>
     </div>
-</div>
-<div className="col-4 mt-2" style={leftbar}>
-    <Alert variant="primary">
-    <Alert.Heading>Note!!</Alert.Heading>
-    <p>
-        All saved transaction are recorded with the timestamps. you
-        can filter the saved lands by region,district,cost and market
-        status. click on the link to show all by regions.
-    </p>
-    <p>
-        <Button variant="outline-primary">show all</Button>
-    </p>
-    </Alert>
-    <ListGroup className="mb-3">
-      <ListGroup.Item>Northern Region</ListGroup.Item>
-      <ListGroup.Item>Greater Accra Region</ListGroup.Item>
-      <ListGroup.Item>Ashanti Region</ListGroup.Item>
-    </ListGroup>
-    <Form>
-    <Form.Group id="filter" style={split}>
-        <Form.Control
-        style={filter}
-        id="Fregion"
-        placeholder="region"
-        />
-        <Form.Control
-        style={filter}
-        id="Fdistrict"
-        placeholder="district"
-        />
-    </Form.Group>
-    <Form.Group
-        controlId="cost-filter"
-        className="mt-2"
-        style={split}
-    >
-        <Form.Control style={filter} placeholder="min-cost" />
-        <Form.Control style={filter} placeholder="max-cost" />
-    </Form.Group>
-    <Form.Group className="mt-3 d-flex justify-content-end">
-        <Button>Filter</Button>
-    </Form.Group>
-    </Form>
-</div>
-</div>
-</div>
-</div>
+</div> 
 )
 }
 }

@@ -1,0 +1,19 @@
+input,textarea,select{
+  border: 1px solid lightgray !important;
+  background-color: whitesmoke;
+}
+
+#formelement{
+  height: 100vh;
+  overflow-y: scroll;
+  margin-bottom: 100px;
+}
+
+.form-group{
+  padding: 0px 10px;
+ 
+}
+
+body{
+  overflow-y: hidden !important;
+}

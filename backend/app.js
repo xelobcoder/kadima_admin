@@ -120,3 +120,13 @@ app.get('/api/v1/landview/all/', (request,response) => {
         response.send(data);
     })
 })
+
+
+app.post("/api/land/query", (request,response) => {
+    const {minprice,maxprice,location,region} = request.body;
+     landmodel.find( {
+        location:{ $regex:/^[a-zA-Z]/i},
+        price:{$gte:minprice,$lte:maxprice},
+        region:{$regex:/^[a-zA-Z]/i}
+     },(err,data) => { if(err) response.send("error"); response.send(data)})
+})

@@ -23,17 +23,18 @@ function App() {
   return (
      <div>
         <Routes>
-           <Route path="/login" index element={<Login/>}></Route>
+           <Route index element={<Login/>}></Route>
            <Route path="/"  element={<Layout />}>
            <Route path="/viewmore/" element = {<ViewMore/>}/>
            <Route path="/request" element={<Request/>}>
-               <Route index path="landView" element={<LandView/>}>
+               <Route index element={<LandView/>} />
+               <Route path="landUpload" element={<LandUpload/>} />
+               <Route path="landView" element={<LandView/>} />
+               <Route path="Translands" element={<Translands/>}>
+                  <Route path="Uploadimages/:key" element={<Uploadimages/>}>
                </Route>
-                  <Route path="landUpload" element={<LandUpload/>}></Route>
-                  <Route path="Translands" element={<Translands/>}>
-                     <Route path="Uploadimages/:key" element={<Uploadimages/>}>
-                  </Route>
-               </Route>
+              
+           </Route>
            </Route>
             <Route path="/properties" element={<Properties/>}>
                <Route path="sale" element={<Forsale/>}></Route>

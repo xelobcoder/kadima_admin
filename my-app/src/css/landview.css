@@ -1,92 +1,136 @@
 .imagecards {
-  margin: 0;
-  padding: 0;
   display: -ms-grid;
   display: grid;
-  margin-top: 20px;
-  -ms-grid-columns: 50% 50%;
-      grid-template-columns: 50% 50%;
-  grid-gap: 20px;
+  -ms-grid-columns: (1fr)[4];
+      grid-template-columns: repeat(4, 1fr);
+  grid-gap: 60px 20px;
+  -ms-grid-rows: 450px;
+      grid-template-rows: 450px;
+  grid-auto-rows: 450px;
+  padding: 20px 20px;
 }
 
 .imagecards .card {
-  height: 40vh;
-  width: 100%;
+  background-color: white;
+  border-radius: 5px;
+  border: none !important;
+}
+
+.imagecards .card .card-header, .imagecards .card .card-body, .imagecards .card .card-footer {
   margin: 0;
   padding: 0;
-  border-radius: 0px;
-  border: 1px solid rgba(0, 0, 0, 0.272);
 }
 
 .imagecards .card .card-header {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: start;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  color: red;
-  height: 10%;
+  height: 40%;
+  width: 100%;
+}
+
+.imagecards .card .card-header img {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.imagecards .card .card-header img:hover {
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
 }
 
 .imagecards .card .card-body {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 50% auto;
-      grid-template-columns: 50% auto;
-  -ms-grid-rows: 100%;
-      grid-template-rows: 100%;
+  display: block;
+  padding: 10px 10px;
+  height: 40%;
+}
+
+.imagecards .card .card-body h2 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  line-height: 2.0rem;
+  margin: 0;
   padding: 0;
-  margin: 0;
-  width: 100%;
+  text-transform: capitalize;
+}
+
+.imagecards .card .card-body h1:nth-child(1) {
+  height: 20%;
+}
+
+.imagecards .card .card-body h2:nth-child(2) {
+  color: blue;
+  height: 20%;
+}
+
+.imagecards .card .card-body p {
+  font-size: 14px;
   height: 60%;
-}
-
-.imagecards .card .card-body #image-wrapper {
   width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 10px;
-  cursor: pointer;
-}
-
-.imagecards .card .card-body #image-wrapper img {
-  height: 190px;
-  width: 300px;
-  cursor: pointer;
-}
-
-.imagecards .card .card-body #text-wrapper {
-  padding: 10px;
+  font-family: "Roboto";
+  color: gray;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: break-word;
 }
 
 .imagecards .card .card-footer {
-  margin: 0px;
-  height: 20%;
+  height: 10%;
   width: 100%;
-  padding: 0px 0px;
+  background-color: white;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  padding: 5px 5px;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
-          justify-content: start;
+          justify-content: flex-start;
 }
 
-.imagecards .card .card-footer #firstchild {
+.imagecards .card .card-footer img {
   margin: 0;
-  padding: 0;
+  padding: 4px 4px;
+  width: 14%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+#d-flex {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 70% 50%;
-      grid-template-columns: 70% 50%;
+  -ms-grid-columns: (1fr)[5];
+      grid-template-columns: repeat(5, 1fr);
+  grid-gap: 20px;
 }
 
-.imagecards .card .card-footer #firstchild div {
-  margin-right: 50px;
-  padding: 10px;
+#d-flex input {
+  border: 1px solid lightgray !important;
+  background-color: whitesmoke;
+}
+
+#d-flex input::-webkit-input-placeholder {
+  color: gray;
+  text-transform: capitalize;
+  font-size: 14px;
+}
+
+#d-flex input:-ms-input-placeholder {
+  color: gray;
+  text-transform: capitalize;
+  font-size: 14px;
+}
+
+#d-flex input::-ms-input-placeholder {
+  color: gray;
+  text-transform: capitalize;
+  font-size: 14px;
+}
+
+#d-flex input::placeholder {
+  color: gray;
+  text-transform: capitalize;
+  font-size: 14px;
 }
 /*# sourceMappingURL=landview.css.map */
