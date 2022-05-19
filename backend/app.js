@@ -88,7 +88,6 @@ app.post("", (request,response) => {
 })
 
 const landimages = require("./models/image_land.js");
-const res = require("express/lib/response");
 const getsource = require("./models/originlog.js");
 
 app.use(landimages);
@@ -130,3 +129,4 @@ app.post("/api/land/query", (request,response) => {
         region:{$regex:/^[a-zA-Z]/i}
      },(err,data) => { if(err) response.send("error"); response.send(data)})
 })
+

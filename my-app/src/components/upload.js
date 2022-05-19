@@ -6,231 +6,275 @@ import axios from 'axios';
 
 
 function Uploads(props) {
-    const [name, setname] = useState("");
-    const [price, setPrice] = useState("");
-    const [description, setDescription] = useState("");
-    const [area, setArea] = useState("");
-    const [region, setRegion] = useState("");
-    const [district, setDistrict] = useState("");
-    const [bathrooms, setBathrooms] = useState("");
-    const [toilet, setToilet] = useState("");
-    const [bedrooms, setBedrooms] = useState("");
-    const [parking, setParking] = useState("");
-    const [type, setType] = useState("");
-    const [marketStatus, setMarketStatus] = useState("");
-    const [gps, setGps] = useState("");
-    const [address, setAddress] = useState("");
-    const [phone1, setPhone1] = useState("");
-    const [phone2, setPhone2] = useState("");
-    const [purpose,setPurpose] = useState("sell");
-    
-    const handleSubmit = (e) => {
-    e.preventDefault();
-        const payload = {
-            name,
-            price,
-            description,
-            area,
-            region,
-            district,
-            bathrooms,
-            toilet,
-            bedrooms,
-            parking,
-            type,
-            marketStatus,
-            gps,
-            address,
-            phone: [phone1, phone2],
-            purpose,
-        }
-        const BASEURL = "http://localhost:8000/api/v1/property";
-        const postPayload = axios(BASEURL, {
-            method: "POST",
-            data: payload,
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem("accesstoken")}`
-            }
-        })
-        postPayload
-        .then((t) => {
-            console.log(t);
-        }).catch((e) => { console.log(e) });
-}
+    const [loading,setLoading] = useState(true);
+    const [error,setError] = useState(false);
+    const [title,setTitle] = useState("");
+    const [description,setDescription] = useState("");
+    const [price,setPrice] = useState("");
+    const [status,setStatus] = useState("");
+    const [address,setAddress] = useState("");
+    const [region,setRegion] = useState("");
+    const [district,setDistrict] = useState("");
+    const [area,setArea] = useState("");
+    const [categories,setCategories] = useState("");
+    const [listing,setListing] = useState("");
+    const [gps,setGps] = useState("");
+    const [latitude,setLatitude] = useState("");
+    const [longitude,setLongitude] = useState("");
+    const [bedrooms,setBedrooms] = useState("");
+    const [bathrooms,setBathrooms] = useState("");
+    const [garages,setGarages] = useState("");
+    const [toilets,setToilets] = useState("");
+    const [agentNotes,setAgentNotes] = useState("");
+    const [type,setType] = useState("");
+    const [basements,setBasements] = useState("");
+    const [parking,setParking] = useState("");
+    const [rooms,setRooms] = useState("");
+    const [kitchen,setKitchen] = useState("");
+    const [gym,setGym] = useState("");
+    const [mediaStudio,setMediaStudio] = useState("");
+    const [swimmingPool,setSwimmingPool] = useState("");
+    const [terrace,setTerrace] = useState("");
+    const [garden,setGarden] = useState("");
+    const [courtyard,setCourtyard] = useState("");
+    const [balcony,setBalcony] = useState("");
+    const [pation,setPation] = useState("");
+    const [gas,setGas] = useState("");
+    const [water,setWater] = useState("");
+    const [electricity,setElectricity] = useState("");
+    const [sewage,setSewage] = useState("");
+    const [phone,setPhone] = useState("");
+    const [trash,setTrash] = useState("");
+    const [fire,setFire] = useState("");
+    const [cable,setCable] = useState("");
+    const [ventilation,setVentilation] = useState("");
+
+
+
     
     
     
      return (       
-        <div className='container'>
-            <div className="col-10" style={{margin: "0px 100px"}}>
-              <h4 className='alert alert-info p-3 text-lead mt-4 text-capitalize text-dark'>upload details of new Property</h4>
-            <hr/>
-            <div className='col'>
-                 <form onSubmit={(e) => handleSubmit(e)}>
-                    <div className="form-group">
-                        <label for="exampleInputEmail1">Property Name</label>
-                             <input type="text"
-                                 className="form-control" id="name"
-                                 onChange={(e) => setname(e.target.value)}
-                                 aria-describedby="propertyName" required placeholder="Enter Property Name" />
-                    </div>
-                    <div className="form-group">
-                        <label for="exampleInputPassword1">Property Address</label>
-                             <input type="text" className="form-control"
-                                 onChange={(e) => setAddress(e.target.value)} required id="address" placeholder="Enter Property Address" />
-                    </div>
-                    <div className="form-group">
-                        <label for="exampleInputPassword1">Property Description</label>
-                             <textarea type="text"
-                                 onChange={(e) => setDescription(e.target.value)}
-                                 className="form-control" id="description" required placeholder="Enter Property Description" />
-                    </div>
-                    <div className="form-group">
-                        <label for="exampleInputPassword1">Property Price</label>
-                             <input type="number" onChange={(e) => setPrice(e.target.value)}
-                        className="form-control" id="price" placeholder="Enter Property Price" required />
-                    </div>
-                    <div className='form-group'>
-                        <label>purpose</label>
-                        <select className='form-control' onChange={(e) => setPurpose(e.target.value)}>
-                            <option value="sell">sell</option>
-                            <option value="rent">rent</option>
-                            <option value="buy">buy</option>
-                            <option value="lease">lease</option>
-                        </select>
-                    </div>
-                    <div className='form-group'>
-                        <label for="GPSAddress">GPS Address</label>
-                             <input type="text" className="form-control"
-                                 onChange={(e) => setGps(e.target.value)}
-                            id="gps" placeholder="Enter GPS Address" />
-                    </div>
-                    <div className='alert alert-info' id='info'>For Housing structures only</div>
-                    <div className="form-group" id='gridLayer' >
-                        <div className='mr-2'>
-                            <label for="marketStatus">market status</label>
-                                 <select className='form-control' required id="marketStatus" onChange={(e) => setMarketStatus(e.target.value)}>
-                                <option>options</option>
-                                <option>Available</option>
-                                <option>Sold</option>
-                            </select>
-                        </div>
-                        <div className='ml-2'>
-                            <label for="type">Property type</label>
-                            <select className='form-control' id="type" required onChange={(e) =>setType(e.target.value)}>
-                                <option>options</option>
-                                <option>House</option>
-                                <option>Apartment</option>
-                                <option>Land</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="bedrooms">Bedrooms</label>
-                                 <select className='form-control' required id="bedrooms" onChange={(e) => setBedrooms(e.target.value)}>
-                                <option>options</option>
-                                <option value={1}>1</option>
-                                <option value={2}>2</option>
-                                <option value={3}>3</option>
-                                <option value={4}>4</option>
-                                <option value={5}>5</option>
-                                <option value={6}>6</option>
-                                <option value={7}>7</option>
-                                <option value={8}>8</option>
-                                <option value={9}>9</option>
-                                <option value={10}>10</option>
-                                <option value="more">more</option>
-                            </select>
-                        </div>
-                        <div>  
-                            <label for="bathrooms">Bathrooms</label>
-                                 <select className='form-control' required id="bathrooms" onChange={(e) => setBathrooms(e.target.value)}>
-                                <option>options</option>
-                                <option value={1}>1</option>
-                                <option value={2}>2</option>
-                                <option value={3}>3</option>
-                                <option value={4}>4</option>
-                                <option value={5}>5</option>
-                                <option value={6}>6</option>
-                                <option value={7}>7</option>
-                                <option value={8}>8</option>
-                                <option value={9}>9</option>
-                                <option value={10}>10</option>
-                                <option value="more">more</option>
-                            </select>
-                        </div>
-                     </div>
-                    <div className="form-group">
-                     <label for="toliet"> toliet</label>
-                        <select className='form-control' required id="toliet" onChange={(e) => setToilet(e.target.value)}>
-                              <option>options</option>
-                                 <option>Yes
-                            </option>
-                            <option>No</option>
-                        </select>
-                     </div>
-                     <div className="form-group">
-                            <label for="parking">Parking</label>
-                            <select className='form-control' id="parking" required onChange={(e) => setParking(e.target.value)}>
-                            <option>default</option>
-                            <option>Yes</option>
-                            <option>No</option>
-                         </select>
-                    </div>
-                    <div className='form-group'>
-                        <label for="phone Number1">Phone Number 1</label>
-                             <input type="tel" inputMode='tel'
-                                onChange={(e) => setPhone1(e.target.value)}
-                            className="form-control" min={10} max={10} required multiple id="phone Number_1" placeholder="Enter Phone Number" /> 
-                    </div>
-                    <div className='form-group'>
-                        <label for="phone Number2">Phone Number 2</label>
-                             <input inputMode='tel' type="tel" max={10} min={10}
-                                 className="form-control" multiple id="phoneNumber_2"
-                                 onChange={(e) => setPhone2(e.target.value)} 
-                            placeholder="Enter Phone Number" />
-                    </div>
-                    <div className='form-group'>
-                            <label>regions</label>
-                             <select className='form-control' required id='region' onChange={(e) => setRegion(e.target.value)}>
-                                 <option>select region</option>
-                                <option value={"Northern Region"}>Northern Region</option>
-                                <option value="Central Region">Central Region</option>
-                                <option value="Eastern Region">Eastern Region</option>
-                                <option value="Western Region">Western Region</option>
-                                <option value="Volta Region">Volta Region</option>
-                                <option value="Brong Ahafo Region">Brong Ahafo Region</option>
-                                <option value="Upper East Region">Upper East Region</option>
-                                <option value="Upper West Region">Upper West Region</option>
-                                <option value="Ashanti Region">Ashanti Region</option>
-                                <option value="Greater Accra Region">Greater Accra Region</option>
-                                <option value="Savannah Region">Savannah Region</option>
-                                <option value="North East Region">North East Region</option>
-                                <option value="Bono Region">Bono Region</option>
-                                <option value="Ahafo Region">Ahafo Region</option>
-                                <option value ="Western North Region">Western North Region</option>
-                            </select>
-                    </div> 
-                    <div className='form-group'>
-                            <label>District</label>
-                             <input className='form-control'
-                               onChange={(e) => setDistrict(e.target.value)}     
-                            id='district' placeholder='Enter district name?' required />
-                    </div> 
-                    <div className='form-group'>
-                            <label>Area Location</label>
-                             <input className='form-control'
-                                onChange={(e) => setArea(e.target.value)}
-                            placeholder='location' required id='area' />
-                    </div> 
-                    
-                    <button type='submit' className='btn btn-primary mt-3'>
-                        Upload
-                    </button>
-                </form>
-              </div>
-          </div>
-        </div>
+       <div className='container-fluid'>
+         <div className='container'>
+            <div className='row' id='row'>
+                <div className='col' id='side'>
+                  <div>
+                      <h2>property Description</h2>
+                      <h2>location</h2>
+                      <h2>Details</h2>
+                      <h2>Amenities</h2>
+                      <h2>Media</h2>
+                  </div>
+                </div>
+                <div className='col' id='main'>
+                   <form>
+                       <section id='descriptionsection'>
+                           <div>
+                              <label>title</label>
+                              <input className='form-control' id="title"  onChange={(e) => setTitle(e.target.value)}></input>
+                           </div>
+                           <div>
+                               <label>description</label>
+                               <textarea className='form-control' id="description" onChange={(e) => setDescription(e.target.value)}>
+
+                               </textarea>
+                           </div>
+                           <div>
+                               <label>categories</label>
+                               <select className='form-control' id="categories" onChange={(e) => setListing(e.target.value)}>
+                                    <option value="">listed in</option>
+                                    <option value="sell">sell</option>
+                                    <option value="rent">rent</option>
+                               </select>
+                           </div>
+                           <div>
+                               <label>status</label>
+                                <select className='form-control' id="status" onChange={(e) => setStatus(e.target.value)}>
+                                    <option value="">market status</option>
+                                    <option value="available">available</option>
+                                    <option value="sold">sold</option>
+                                    <option value="under_contract">under contract</option>
+                                    <option value="under_offer">under offer</option>
+                                    <option value="rented">rented</option>
+                                    <option value="leased">leased</option>
+                                    <option value="reserved">reserved</option>
+                                    <option value="withdrawn">withdrawn</option>
+                                </select>
+                           </div>
+                           <br></br>
+                           <div id="buttonchain">
+                                <button className='btn btn-warning mt-2'>next section</button>
+                           </div>
+                       </section>
+                       <section id="address">
+                            <div> 
+                                <label>address</label>
+                                <input className='form-control' id="address" onChange={(e) => setAddress(e.target.value)}></input>
+                            </div>
+                            <div>
+                                <label>region</label>
+                                <input className='form-control' id="region" onChange={(e) => setRegion(e.target.value)}></input>
+                            </div>
+                            <div>
+                                <label>district</label>
+                                <input className='form-control' id="district" onChange={(e) => setDistrict(e.target.value)}></input>
+                            </div>
+                            <div>
+                                <label>area</label>
+                                <input className='form-control' id="area" onChange={(e) => setArea(e.target.value)}></input>
+                            </div>
+                            <div>
+                                <label>gps</label>
+                                <input className='form-control' id="gps" onChange={(e) => setGps(e.target.value)}></input>
+                            </div>
+                            <div>
+                                <label>latitude </label>
+                                <input className='form-control' id='latitude' onChange={(e) => setLatitude(e.target.value)}/> 
+                            </div>
+                            <div>
+                                <label>longitude</label>
+                                <input className='form-control' id='longitude' onChange={(e) => setLongitude(e.target.value)}/>
+                            </div>
+                            <br></br>
+                            <div id="buttonchain">
+                                <button className='btn btn-warning mt-2'>previous section</button>
+                                <button className='btn btn-warning mt-2'>next section</button>
+                            </div>
+                       </section>
+                       <section id='details'>
+                           <div>
+                               <label>bedrooms</label>
+                                 <input className='form-control' id="bedrooms" onChange={(e) => setBedrooms(e.target.value)}></input>
+                                
+                           </div>
+                           <div>
+                                 <label>bathrooms</label>
+                                 <input className='form-control' id="bathrooms" onChange={(e) => setBathrooms(e.target.value)}></input>
+                           </div>
+                           <div>
+                               <label>rooms</label>
+                                 <input className='form-control' id="rooms" onChange={(e) => setRooms(e.target.value)}></input>
+                           </div>
+                            <div>
+                                <label>parking</label>
+                                <input className='form-control' id="parking" onChange={(e) => setParking(e.target.value)}></input>
+                            </div>
+                            <div>
+                                <label>toilet</label>
+                                <input className='form-control' id="toilet" onChange={(e) => setToilets(e.target.value)}></input>
+                            </div>
+                            <div>
+                                <label>basements</label>
+                                <input className='form-control' id="basements" onChange={(e) => setBasements(e.target.value)}></input>
+                            </div>
+                            <div>
+                                <label>garages</label>
+                                <input className='form-control' id="garages" onChange={(e) => setGarages(e.target.value)}></input>
+                            </div>
+                            <div>
+                                <label>type</label>
+                                <input className='form-control' id="type" onChange={(e) => setType(e.target.value)}></input>
+                            </div>
+                            <div>
+                               <label>Agent Notes</label>
+                                 <textarea className='form-control' id="agentNotes" onChange={(e) => setAgentNotes(e.target.value)}></textarea>
+                            </div>
+                            <br></br>
+                            <div id="buttonchain">
+                               <button className='btn btn-warning mt-3'>next section</button>
+                            </div> 
+                       </section>
+                       <section id='amenities'>
+                          <div>
+                             <label>interior details</label>
+                             <div>
+                                 <div id="selector">
+                                    <input type="checkbox" value="kitchen equipped" onChange={(e) => setKitchen(e.target.value)}/>
+                                    <label>kitchen equipped</label>
+                                 </div>
+                                <div id='selector'>
+                                    <input type="checkbox" value="gym" onChange={(e) => setGym(e.target.value)} />
+                                    <label>gym</label>
+                                </div>
+                                <div id='selector'>
+                                    <input type="checkbox" value="media studio" onChange={(e) => setMediaStudio(e.target.value)}/>
+                                    <label>media studio</label>
+                                </div>
+                             </div>
+                             <div>
+                                 <label>outdoor</label>
+                                <div id='selector'>
+                                    <input type="checkbox" value="pool" onChange={(e) => setSwimmingPool(e.target.value)}/>
+                                    <label>pool</label>
+                                </div>
+                                <div id='selector'> 
+                                    <input type="checkbox" value="garden" onChange={(e) => setGarden(e.target.value)}/>
+                                    <label>garden</label>
+                                </div>
+                                <div id='selector'>
+                                    <input type="checkbox" value="balcony" onChange={(e) => setBalcony(e.target.value)}/>
+                                    <label>balcony</label>
+                                </div>
+                                <div id='selector'>
+                                    <input type="checkbox" value="terrace" onChange={(e) => setTerrace(e.target.value)}/>
+                                    <label>terrace</label>
+                                </div>
+                                <div id='selector'>
+                                    <input type="checkbox" value="patio" onChange={(e) => setPation(e.target.value)}/>
+                                    <label>patio</label>
+                                </div>
+                                <div id='selector'>
+                                    <input type="checkbox" value="courtyard" onChange={(e) => setCourtyard(e.target.value)}/>
+                                    <label>courtyard</label>
+                                </div>
+                             </div>
+                             <div>
+                                <label>utilities</label>
+                                <div id='selector'>
+                                    <input type="checkbox" value="gas" onChange={(e) => setGas(e.target.value)}/>
+                                    <label>gas</label>
+                                </div>
+                                <div id='selector'>
+                                    <input type="checkbox" value="electricity" onChange={(e)  => setElectricity(e.target.value)}/>
+                                    <label>electricity</label>
+                                </div>
+                                <div id='selector'>
+                                    <input type="checkbox" value="water" onChange={(e) => setWater(e.target.value)}/>
+                                    <label>water</label>
+                                </div>
+                                <div id='selector'>
+                                    <input type="checkbox" value="sewer" onChange={(e) => setSewage(e.target.value)}/>
+                                    <label>sewer</label>
+                                </div>
+                                <div id='selector'>
+                                    <input type="checkbox" value="trash" onChange={(e) => setTrash(e.target.value)}/>
+                                    <label>trash</label>
+                                </div>
+                                <div id='selector'>
+                                    <input type="checkbox" value="cable" onChange={(e) => setCable(e.target.value)}/>
+                                    <label>cable</label>
+                                </div>
+                                <div id='selector'>
+                                    <input type="checkbox" value="internet" />
+                                    <label>internet</label> 
+                                </div>
+                                <div id='selector'>
+                                    <input type="checkbox" value="ventilation" onChange={(e) => setVentilation(e.target.value)}/>
+                                    <label>ventilation</label>
+                                </div>
+                                <div id='selector'>
+                                    <input type="checkbox" value="fireplace" onChange={(e) => setFire(e.target.value)}/>
+                                    <label>fireplace</label>
+                                </div>
+                             </div>
+                          </div>
+                       </section>
+                   </form>
+                </div>
+            </div>
+         </div>
+       </div>
     )
 }
   
