@@ -65,10 +65,10 @@
 }
 
 #row #main form {
-  padding: 20px 20px;
+  padding: 10px 20px;
 }
 
-#row #main form #address {
+#row #main form #address-section, #row #main form #amenities-section {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: (1fr)[2];
@@ -76,12 +76,60 @@
   grid-gap: 30px;
 }
 
-#row #main form #descriptionsection {
+#row #main form #details-section {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px 20px;
+}
+
+#row #main form #description-section {
   display: block;
 }
 
-#row #main form #address, #row #main form #details {
+#row #main form #address-section, #row #main form #details-section, #row #main form #amenities-section {
   display: none;
+}
+
+#row #main form #amenities-section {
+  display: "grid";
+  -ms-grid-columns: 100% !important;
+      grid-template-columns: 100% !important;
+}
+
+#row #main form #amenities-section #ams > #cahp {
+  font-weight: 600;
+  color: black;
+  font-size: 16px;
+}
+
+#row #main form #amenities-section #ams {
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  margin: 0;
+  padding: 0;
+  -ms-grid-columns: 100%;
+      grid-template-columns: 100%;
+  grid-gap: 10px;
+}
+
+#row #main form #amenities-section #ams #gein {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[6];
+      grid-template-columns: repeat(6, 1fr);
+}
+
+#row #main form #amenities-section #ams #gein #selector {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 10% auto;
+      grid-template-columns: 10% auto;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 #row #main form section div label {
@@ -97,7 +145,7 @@
 }
 
 #row #main form section div textarea {
-  height: 150px;
+  height: 100px;
   resize: none;
   background-color: whitesmoke;
 }
@@ -112,16 +160,21 @@
   display: block;
 }
 
-#buttonchain {
+.active {
+  background-color: teal !important;
+  color: white;
+}
+
+#buttonchains {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (1fr)[2];
-      grid-template-columns: repeat(2, 1fr);
+  -ms-grid-columns: (1fr)[2] !important;
+      grid-template-columns: repeat(2, 1fr) !important;
   width: 100%;
   margin: 0;
 }
 
-#buttonchain button {
+#buttonchains button {
   margin-right: 50px;
 }
 /*# sourceMappingURL=upload.css.map */

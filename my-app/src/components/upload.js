@@ -17,7 +17,6 @@ function Uploads(props) {
     const [district,setDistrict] = useState("");
     const [area,setArea] = useState("");
     const [categories,setCategories] = useState("");
-    const [listing,setListing] = useState("");
     const [gps,setGps] = useState("");
     const [latitude,setLatitude] = useState("");
     const [longitude,setLongitude] = useState("");
@@ -49,6 +48,118 @@ function Uploads(props) {
     const [cable,setCable] = useState("");
     const [ventilation,setVentilation] = useState("");
 
+    const handleActive = (e) => {
+        e.preventDefault();
+
+        // get all the sidebar children h2
+        // remove the active class from all the sidebars 
+        const children = document.querySelectorAll("#side-children > h2");
+        // sections of the main bar
+        const sections = document.querySelectorAll("form > section");
+        // display none for all the sections
+
+        const hideSections = () => {
+            sections.forEach(section => {
+                section.style.display = "none";
+            });
+        }
+        hideSections();
+        // remove the active class from all the sidebars
+
+        children.forEach ( (child,index) =>  {
+            child.classList.remove("active");
+        })
+
+        
+        // add the active class to the current sidebar
+        e.target.classList.add("active");
+        // display the current section
+
+        // get the id of the current sidebar and display its corresponding section
+
+        let id = e.target.getAttribute("id");
+
+        let section = document.querySelector(`#${id}-section`);
+
+        console.log(section)
+
+        if(section === "description") {
+           section.style.display = "block";
+        } else{
+            section.style.display = "grid";
+        }
+
+    }
+
+    const handleTransverse = (e,p,n) => {
+        e.preventDefault();
+        if(p ==="description-section"){
+            document.getElementById(p).style.display = "none";
+            document.getElementById(n).style.display ="block";
+        } 
+
+        // make the current section display active
+        let sectionHead = n.split("-")[0];
+        let sectionHeadNoneActive = p.split("-")[0];
+        let sectionNoneActive = document.querySelector(`#${sectionHeadNoneActive}`);
+        let section = document.querySelector(`#${sectionHead}`);
+
+        section.classList.add("active");
+        sectionNoneActive.classList.remove("active");
+        document.getElementById(p).style.display = "none";
+        document.getElementById(n).style.display ="grid";
+    }
+
+    const Submit = (e) => {
+        e.preventDefault();
+        let data = {
+            title,
+            description,
+            price,
+            status,
+            address,
+            region,
+            district,
+            area,
+            categories,
+            gps,
+            latitude,
+            longitude,
+            bedrooms,
+            bathrooms,
+            garages,
+            toilets,
+            agentNotes,
+            type,
+            basements,
+            parking,
+            rooms,
+            kitchen,
+            gym,
+            mediaStudio,
+            swimmingPool,
+            terrace,
+            garden,
+            courtyard,
+            balcony,
+            pation,
+            gas,
+            water,
+            electricity,
+            sewage,
+            phone,
+            trash,
+            fire,
+            cable,
+            ventilation,
+        }
+
+        let pushdata = axios.post("http://localhost:5000/api/v1/property",data)
+
+        pushdata.then ( (response) => {
+            console.log(response.data)
+        }).catch ( (err) => console.log(err));
+    }
 
 
     
@@ -59,17 +170,17 @@ function Uploads(props) {
          <div className='container'>
             <div className='row' id='row'>
                 <div className='col' id='side'>
-                  <div>
-                      <h2>property Description</h2>
-                      <h2>location</h2>
-                      <h2>Details</h2>
-                      <h2>Amenities</h2>
-                      <h2>Media</h2>
+                  <div id='side-children'>
+                      <h2 id="description" className='active' onClick={(e) => handleActive(e)}>property Description</h2>
+                      <h2 id='address' onClick={(e) => handleActive(e)}>location</h2>
+                      <h2 id='details' onClick={(e) => handleActive(e)}>Details</h2>
+                      <h2 id='amenities' onClick={(e) => handleActive(e)}>Amenities</h2>
+                      <h2 id="media" onClick={(e) => handleActive(e)}>Media</h2>
                   </div>
                 </div>
                 <div className='col' id='main'>
-                   <form>
-                       <section id='descriptionsection'>
+                   <form onSubmit={(e) => Submit(e)}>
+                       <section id='description-section'>
                            <div>
                               <label>title</label>
                               <input className='form-control' id="title"  onChange={(e) => setTitle(e.target.value)}></input>
@@ -82,7 +193,7 @@ function Uploads(props) {
                            </div>
                            <div>
                                <label>categories</label>
-                               <select className='form-control' id="categories" onChange={(e) => setListing(e.target.value)}>
+                               <select className='form-control' id="categories" onChange={(e) => setCategories(e.target.value)}>
                                     <option value="">listed in</option>
                                     <option value="sell">sell</option>
                                     <option value="rent">rent</option>
@@ -102,12 +213,16 @@ function Uploads(props) {
                                     <option value="withdrawn">withdrawn</option>
                                 </select>
                            </div>
+                           <div>
+                               <label>price</label>
+                               <input type="number" className='form-control' id="price" onChange={(e) => setPrice(e.target.value)}></input>
+                           </div>
                            <br></br>
                            <div id="buttonchain">
-                                <button className='btn btn-warning mt-2'>next section</button>
+                                <button  onClick={(e) => handleTransverse(e,"description-section","address-section")} className='btn btn-warning mt-2'>next section</button>
                            </div>
                        </section>
-                       <section id="address">
+                       <section id="address-section">
                             <div> 
                                 <label>address</label>
                                 <input className='form-control' id="address" onChange={(e) => setAddress(e.target.value)}></input>
@@ -137,12 +252,12 @@ function Uploads(props) {
                                 <input className='form-control' id='longitude' onChange={(e) => setLongitude(e.target.value)}/>
                             </div>
                             <br></br>
-                            <div id="buttonchain">
-                                <button className='btn btn-warning mt-2'>previous section</button>
-                                <button className='btn btn-warning mt-2'>next section</button>
+                            <div id="buttonchains">
+                                <button onClick={(e) => handleTransverse(e,"address-section","description-section")} className='btn btn-warning mt-2'>previous section</button>
+                                <button className='btn btn-warning mt-2' onClick={(e) => handleTransverse(e,"address-section","details-section")}>next section</button>
                             </div>
                        </section>
-                       <section id='details'>
+                       <section id='details-section'>
                            <div>
                                <label>bedrooms</label>
                                  <input className='form-control' id="bedrooms" onChange={(e) => setBedrooms(e.target.value)}></input>
@@ -180,15 +295,15 @@ function Uploads(props) {
                                <label>Agent Notes</label>
                                  <textarea className='form-control' id="agentNotes" onChange={(e) => setAgentNotes(e.target.value)}></textarea>
                             </div>
-                            <br></br>
-                            <div id="buttonchain">
-                               <button className='btn btn-warning mt-3'>next section</button>
+                            <div id="buttonchains">
+                               <button onClick={(e) => handleTransverse(e,"details-section","address-section")} className='btn btn-warning mt-3'>previous section</button>
+                               <button className='btn btn-warning mt-3' onClick={(e) => handleTransverse(e,"details-section","amenities-section")}>next section</button>
                             </div> 
                        </section>
-                       <section id='amenities'>
-                          <div>
-                             <label>interior details</label>
-                             <div>
+                       <section id='amenities-section'>
+                          <div id='ams'>
+                             <label id='cahp'>interior details</label>
+                             <div id='gein'>
                                  <div id="selector">
                                     <input type="checkbox" value="kitchen equipped" onChange={(e) => setKitchen(e.target.value)}/>
                                     <label>kitchen equipped</label>
@@ -201,73 +316,82 @@ function Uploads(props) {
                                     <input type="checkbox" value="media studio" onChange={(e) => setMediaStudio(e.target.value)}/>
                                     <label>media studio</label>
                                 </div>
-                             </div>
-                             <div>
-                                 <label>outdoor</label>
-                                <div id='selector'>
-                                    <input type="checkbox" value="pool" onChange={(e) => setSwimmingPool(e.target.value)}/>
-                                    <label>pool</label>
-                                </div>
-                                <div id='selector'> 
-                                    <input type="checkbox" value="garden" onChange={(e) => setGarden(e.target.value)}/>
-                                    <label>garden</label>
-                                </div>
-                                <div id='selector'>
-                                    <input type="checkbox" value="balcony" onChange={(e) => setBalcony(e.target.value)}/>
-                                    <label>balcony</label>
-                                </div>
-                                <div id='selector'>
-                                    <input type="checkbox" value="terrace" onChange={(e) => setTerrace(e.target.value)}/>
-                                    <label>terrace</label>
-                                </div>
-                                <div id='selector'>
-                                    <input type="checkbox" value="patio" onChange={(e) => setPation(e.target.value)}/>
-                                    <label>patio</label>
-                                </div>
-                                <div id='selector'>
-                                    <input type="checkbox" value="courtyard" onChange={(e) => setCourtyard(e.target.value)}/>
-                                    <label>courtyard</label>
-                                </div>
-                             </div>
-                             <div>
-                                <label>utilities</label>
-                                <div id='selector'>
-                                    <input type="checkbox" value="gas" onChange={(e) => setGas(e.target.value)}/>
-                                    <label>gas</label>
-                                </div>
-                                <div id='selector'>
-                                    <input type="checkbox" value="electricity" onChange={(e)  => setElectricity(e.target.value)}/>
-                                    <label>electricity</label>
-                                </div>
-                                <div id='selector'>
-                                    <input type="checkbox" value="water" onChange={(e) => setWater(e.target.value)}/>
-                                    <label>water</label>
-                                </div>
-                                <div id='selector'>
-                                    <input type="checkbox" value="sewer" onChange={(e) => setSewage(e.target.value)}/>
-                                    <label>sewer</label>
-                                </div>
-                                <div id='selector'>
-                                    <input type="checkbox" value="trash" onChange={(e) => setTrash(e.target.value)}/>
-                                    <label>trash</label>
-                                </div>
-                                <div id='selector'>
-                                    <input type="checkbox" value="cable" onChange={(e) => setCable(e.target.value)}/>
-                                    <label>cable</label>
-                                </div>
-                                <div id='selector'>
-                                    <input type="checkbox" value="internet" />
-                                    <label>internet</label> 
-                                </div>
-                                <div id='selector'>
-                                    <input type="checkbox" value="ventilation" onChange={(e) => setVentilation(e.target.value)}/>
-                                    <label>ventilation</label>
-                                </div>
-                                <div id='selector'>
-                                    <input type="checkbox" value="fireplace" onChange={(e) => setFire(e.target.value)}/>
-                                    <label>fireplace</label>
+                            </div>
+                            <div id='ams'>
+                                 <label id='cahp'>outdoor</label>
+                                <div id='gein'>
+                                    <div id='selector'>
+                                        <input type="checkbox" value="pool" onChange={(e) => setSwimmingPool(e.target.value)}/>
+                                        <label>pool</label>
+                                    </div>
+                                    <div id='selector'> 
+                                        <input type="checkbox" value="garden" onChange={(e) => setGarden(e.target.value)}/>
+                                        <label>garden</label>
+                                    </div>
+                                    <div id='selector'>
+                                        <input type="checkbox" value="balcony" onChange={(e) => setBalcony(e.target.value)}/>
+                                        <label>balcony</label>
+                                    </div>
+                                    <div id='selector'>
+                                        <input type="checkbox" value="terrace" onChange={(e) => setTerrace(e.target.value)}/>
+                                        <label>terrace</label>
+                                    </div>
+                                    <div id='selector'>
+                                        <input type="checkbox" value="patio" onChange={(e) => setPation(e.target.value)}/>
+                                        <label>patio</label>
+                                    </div>
+                                    <div id='selector'>
+                                        <input type="checkbox" value="courtyard" onChange={(e) => setCourtyard(e.target.value)}/>
+                                        <label>courtyard</label>
+                                    </div>
                                 </div>
                              </div>
+                             <div id='ams'>
+                                <label id='cahp'>utilities</label>
+                                <div id="gein">
+                                    <div id='selector'>
+                                        <input type="checkbox" value="gas" onChange={(e) => setGas(e.target.value)}/>
+                                        <label>gas</label>
+                                    </div>
+                                    <div id='selector'>
+                                        <input type="checkbox" value="electricity" onChange={(e)  => setElectricity(e.target.value)}/>
+                                        <label>electricity</label>
+                                    </div>
+                                    <div id='selector'>
+                                        <input type="checkbox" value="water" onChange={(e) => setWater(e.target.value)}/>
+                                        <label>water</label>
+                                    </div>
+                                    <div id='selector'>
+                                        <input type="checkbox" value="sewer" onChange={(e) => setSewage(e.target.value)}/>
+                                        <label>sewer</label>
+                                    </div>
+                                    <div id='selector'>
+                                        <input type="checkbox" value="trash" onChange={(e) => setTrash(e.target.value)}/>
+                                        <label>trash</label>
+                                    </div>
+                                    <div id='selector'>
+                                        <input type="checkbox" value="cable" onChange={(e) => setCable(e.target.value)}/>
+                                        <label>cable</label>
+                                    </div>
+                                    <div id='selector'>
+                                        <input type="checkbox" value="internet" />
+                                        <label>internet</label> 
+                                    </div>
+                                    <div id='selector'>
+                                        <input type="checkbox" value="ventilation" onChange={(e) => setVentilation(e.target.value)}/>
+                                        <label>ventilation</label>
+                                    </div>
+                                    <div id='selector'>
+                                        <input type="checkbox" value="fireplace" onChange={(e) => setFire(e.target.value)}/>
+                                        <label>fireplace</label>
+                                    </div>
+                                </div>
+                                
+                             </div>
+                             <div id='buttonchains'>
+                               <button onClick={ (e) => handleTransverse(e,"amenities-section","details-section")} className='btn btn-warning mt-3'>previous section</button>
+                               <button type='submit' className='btn btn-warning mt-3 ml-5'>submit property</button>
+                            </div>
                           </div>
                        </section>
                    </form>

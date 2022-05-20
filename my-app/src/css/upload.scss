@@ -42,18 +42,51 @@
         margin: 0;
         padding: 0;
         form{
-            padding: 20px 20px;
-            #address{
+            padding: 10px 20px;
+            #address-section,#amenities-section{
                 display: grid;
                 grid-template-columns: repeat(2,1fr);
                 grid-gap: 30px;
             }
-
-            #descriptionsection{
+            #details-section{
+                display: grid;
+                grid-template-columns: repeat(3,1fr);
+                grid-gap: 10px 20px;
+            }
+            #description-section{
                 display:block;
             }
-            #address,#details{
+            #address-section,#details-section,#amenities-section{
                 display: none;
+            }
+            #amenities-section{
+                display: "grid";
+                grid-template-columns: 100%!important;
+                #ams > #cahp{
+                    font-weight: 600;
+                    color: black;
+                    font-size: 16px;
+                }
+                #ams{
+                    width: 100%;
+                    display: grid;
+                    margin: 0;
+                    padding: 0;
+                    grid-template-columns: 100%;
+                    grid-gap: 10px;
+                    #gein{
+                        display: grid;
+                        grid-template-columns: repeat(6,1fr);
+                        #selector{
+                            display: grid;
+                            grid-template-columns: 10% auto;
+                            align-items: center;
+                        }
+
+                    }
+                }
+                
+                    
             }
             section{
                 div{
@@ -68,7 +101,7 @@
                        background-color: whitesmoke;
                    }
                    textarea{
-                       height: 150px;
+                       height: 100px;
                        resize: none;
                        background-color: whitesmoke;
                    }
@@ -82,11 +115,20 @@
     }
 }
 
-#buttonchain{
+
+.active{
+    background-color: teal !important;
+    color: white;
+}
+
+
+#buttonchains{
     display: grid;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2,1fr) !important;
+    // grid-gap: 20px 100px !important;
     width: 100%;
     margin: 0;
-    button{margin-right: 50px;}
-   
+    button{
+        margin-right: 50px;
+    }
 }
